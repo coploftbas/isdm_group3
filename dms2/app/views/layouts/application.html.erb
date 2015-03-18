@@ -18,12 +18,12 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li class="active"><%= link_to "Home", root_path %></li>
+        <li class="active"><%= link_to "Project", root_path %></li>
         <% if user_signed_in? %>
-            Welcome <%= current_user.email %>! Not you?
+           <li><a href="">Welcome <%= current_user.email %>!</a></li>
            <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
         <% else %>
-            <li><%= link_to "Sign up", new_user_registration_path %></li>
+            <% link_to "Sign up", new_user_registration_path %>
             <li><%= link_to "Sign in", new_user_session_path %></li>
         <% end %>
       </ul>
@@ -34,7 +34,7 @@
 <div class="container">
 
   <% if !(notice == nil) %>
-  <div class="alert alert-info" role="alert">
+  <div class="alert alert-success" role="alert">
     <%= notice %>
   </div>
   <% end %>
