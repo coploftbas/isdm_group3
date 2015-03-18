@@ -1,25 +1,4 @@
 Rails.application.routes.draw do
-  resources :document_versions
-
-  resources :documents
-
-  resources :prerequisites
-
-  resources :projects
-
-  resources :project_user_roles
-
-  resources :roles
-
-  resources :user_types
-
-  devise_for :users, ActiveAdmin::Devise.config
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-  resources :links
-
-  root 'projects#index'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
