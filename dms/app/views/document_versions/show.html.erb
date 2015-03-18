@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Document:</strong>
+  <%= @document_version.document_id %>
+</p>
+
+<p>
+  <strong>Document name:</strong>
+  <%= @document_version.document_name %>
+</p>
+
+<p>
+  <strong>Version document name:</strong>
+  <%= @document_version.version_document_name %>
+</p>
+
+<p>
+  <strong>File location:</strong>
+  <%= @document_version.file_location %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @document_version.comment %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @document_version.created_by %>
+</p>
+
+<p>
+  <strong>Updated by:</strong>
+  <%= @document_version.updated_by %>
+</p>
+
+<%= link_to 'Edit', edit_document_version_path(@document_version) %> |
+<%= link_to 'Back', document_versions_path %>

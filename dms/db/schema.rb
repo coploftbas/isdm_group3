@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312152044) do
+ActiveRecord::Schema.define(version: 20150318042028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,9 +49,69 @@ ActiveRecord::Schema.define(version: 20150312152044) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "document_versions", force: true do |t|
+    t.integer  "document_id"
+    t.text     "document_name"
+    t.text     "version_document_name"
+    t.text     "file_location"
+    t.text     "comment"
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "documents", force: true do |t|
+    t.string   "document_name"
+    t.text     "comment"
+    t.text     "file_location"
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "links", force: true do |t|
     t.string   "name"
     t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "prerequisites", force: true do |t|
+    t.integer  "document_id"
+    t.integer  "prerequisite_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_user_roles", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", force: true do |t|
+    t.string   "project_name"
+    t.integer  "created_by"
+    t.integer  "delete_flg"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", force: true do |t|
+    t.string   "role_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_types", force: true do |t|
+    t.string   "designation"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
