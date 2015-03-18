@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  resources :prerequisites
+
+  resources :document_versions
+
+  resources :documents
+
+  resources :project_user_roles
+
+  resources :user_types
+
+  resources :roles
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   devise_for :users
   resources :projects
 
