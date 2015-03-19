@@ -14,7 +14,24 @@
   <%= @project.start_date %>
 </p>
 
-
+<table class="table">
+  <thead>
+    <tr>
+      <th>Team Manager</th>
+      <th>Assign</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= current_user.firstname+ " "+ current_user.lastname  %></td>
+        <% if (ProjectUserRole.find_by_user_id_id(current_user.id)).nil? %>
+            <td><%= link_to image_tag('off.jpg'), {:controller => :projects, :action=> :set_active_manager, :project_id => @project.id, user_id: current_user.id, :assign => 1}, :class =>'assign' %></td>
+        <% else %>
+            <td><%= link_to image_tag('on.jpg'), {:controller => :projects, :action=> :set_deactive_manager, :project_id => @project.id, user_id: current_user.id, :assign => 1}, :class =>'assign' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <table class="table">
   <thead>
     <tr>

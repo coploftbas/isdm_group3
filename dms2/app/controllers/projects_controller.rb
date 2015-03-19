@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :assign_role]
   before_filter :authenticate_user!
 
   helper_method :set_active
@@ -15,6 +15,10 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @users = User.where.not(id: 1)
+  end
+
+  def assign_role
+     @users = User.where.not(id: 1)
   end
 
   # GET /projects/new
@@ -83,6 +87,26 @@ class ProjectsController < ApplicationController
       redirect_to project_path(:id=>params[:project_id]), :notice=> 'Remove member success'
     else
       redirect_to project_path(:id=>params[:project_id]), :alert=> 'Remove member failed'
+    end
+  end
+
+    def set_active_manager
+    pur_save = ProjectUserRole.new(:project_id_id=>params[:project_id],:user_id_id=>params[:user_id],:role_id_id=>1)
+
+    if pur_save.save
+      redirect_to project_path(:id=>params[:project_id]), :notice=> 'Assign Team Manager success'
+    else
+      redirect_to project_path(:id=>params[:project_id]), :alert=> 'Assign Team Manager failed'
+    end
+  end
+
+  def set_deactive_manager
+    pur_destroy = ProjectUserRole.find_by(:project_id_id=>params[:project_id],:user_id_id=>params[:user_id],:role_id_id=>1)
+
+    if pur_destroy.destroy
+      redirect_to project_path(:id=>params[:project_id]), :notice=> 'Remove Team Manager success'
+    else
+      redirect_to project_path(:id=>params[:project_id]), :alert=> 'Remove Team Manager failed'
     end
   end
 
