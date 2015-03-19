@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>= D M S =</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -20,8 +22,17 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="active"><%= link_to "Project", root_path %></li>
         <% if user_signed_in? %>
-           <li><a href=""><%= current_user.email %></a></li>
-           <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.firstname %><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+
+                <li><%= link_to "Edit profile", edit_user_registration_path %></li>
+                <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+
+              </ul>
+            </li>
+
+
         <% else %>
             <% link_to "Sign up", new_user_registration_path %>
             <li><%= link_to "Sign in", new_user_session_path %></li>
@@ -52,7 +63,5 @@
   <%= yield %>
 
 </div>
-
-
 </body>
 </html>
