@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
+<<<<<<< HEAD
   <data-source source="LOCAL" name="Rails dms: development" uuid="1efa7cce-8c01-4e9c-8879-d58276da10a8">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
@@ -7,6 +8,15 @@
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
   <data-source source="LOCAL" name="Rails dms: production" uuid="236eb3e9-3218-4b95-8fa5-b1dd785dcf4e">
+=======
+  <data-source source="LOCAL" name="Rails dms: development" uuid="413da740-e49a-4998-86ac-92be4f5324d8">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails dms: test" uuid="551269b5-8040-4f87-b0c0-f1ceeee664c5">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails dms: production" uuid="6ea64699-5022-4b86-a7a1-c6d6a00268ea">
+>>>>>>> 9c879ff8a80a33210519e079fe698676bcf13c9d
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
 </component>

@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="DataSourceManagerImpl" format="xml" hash="3263763403">
     <data-source source="LOCAL" name="Rails dms: development" uuid="1efa7cce-8c01-4e9c-8879-d58276da10a8">
+=======
+  <component name="DataSourceManagerImpl" format="xml" hash="519179667">
+    <data-source source="LOCAL" name="Rails dms: development" uuid="413da740-e49a-4998-86ac-92be4f5324d8">
+>>>>>>> 9c879ff8a80a33210519e079fe698676bcf13c9d
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql:dms_development</jdbc-url>
       <libraries />
     </data-source>
+<<<<<<< HEAD
     <data-source source="LOCAL" name="Rails dms: test" uuid="f90abe6c-af06-43cc-bb5c-ef30076933aa">
+=======
+    <data-source source="LOCAL" name="Rails dms: test" uuid="551269b5-8040-4f87-b0c0-f1ceeee664c5">
+>>>>>>> 9c879ff8a80a33210519e079fe698676bcf13c9d
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql:dms_test</jdbc-url>
       <libraries />
     </data-source>
+<<<<<<< HEAD
     <data-source source="LOCAL" name="Rails dms: production" uuid="236eb3e9-3218-4b95-8fa5-b1dd785dcf4e">
+=======
+    <data-source source="LOCAL" name="Rails dms: production" uuid="6ea64699-5022-4b86-a7a1-c6d6a00268ea">
+>>>>>>> 9c879ff8a80a33210519e079fe698676bcf13c9d
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql:dms_production</jdbc-url>

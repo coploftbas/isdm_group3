@@ -40,3 +40,4 @@ gem 'spring',        group: :development
 
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
+gem 'bootstrap3-rails'
