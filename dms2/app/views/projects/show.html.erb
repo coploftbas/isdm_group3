@@ -27,8 +27,11 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.firstname+ " "+ user.lastname  %></td>
-        <td><%= link_to image_tag('off.jpg'), {action: :set_active, user_id: user.id, :assign => 1}, method: :get, :class =>'assign' %>
-                </td>
+        <% if (ProjectUserRole.find_by_user_id_id(user.id)).nil? %>
+            <td><%= link_to image_tag('off.jpg'), {:controller => :projects, :action=> :set_active, :project_id => @project.id, user_id: user.id, :assign => 1}, :class =>'assign' %></td>
+        <% else %>
+            <td><%= link_to image_tag('on.jpg'), {:controller => :projects, :action=> :set_deactive, :project_id => @project.id, user_id: user.id, :assign => 1}, :class =>'assign' %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

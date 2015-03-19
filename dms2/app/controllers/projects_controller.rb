@@ -2,6 +2,9 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
 
+  helper_method :set_active
+  helper_method :set_deactive
+
   # GET /projects
   # GET /projects.json
   def index
@@ -64,17 +67,25 @@ class ProjectsController < ApplicationController
   end
 
   def set_active
-    render :text=>'OK'
-    # if params[:ban] == '1'
-    #   User.find(params[:id]).update_attribute('delete_flg', 1)
-    #   @notice = 'Successfully banned'
-    # else
-    #   User.find(params[:id]).update_attribute('delete_flg', 0)
-    #   @notice = 'Successfully unbanned'
-    # end
-    # redirect_to authenticated_root_path, notice: @notice
+    pur_save = ProjectUserRole.new(:project_id_id=>params[:project_id],:user_id_id=>params[:user_id],:role_id_id=>2)
+
+    if pur_save.save
+      redirect_to project_path(:id=>params[:project_id]), :notice=> 'Assign member success'
+    else
+      redirect_to project_path(:id=>params[:project_id]), :alert=> 'Assign member failed'
+    end
   end
-  helper_method :set_active
+
+  def set_deactive
+    pur_destroy = ProjectUserRole.find_by(:project_id_id=>params[:project_id],:user_id_id=>params[:user_id],:role_id_id=>2)
+
+    if pur_destroy.destroy
+      redirect_to project_path(:id=>params[:project_id]), :notice=> 'Remove member success'
+    else
+      redirect_to project_path(:id=>params[:project_id]), :alert=> 'Remove member failed'
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

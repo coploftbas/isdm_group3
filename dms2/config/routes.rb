@@ -22,8 +22,8 @@ Rails.application.routes.draw do
 
   resources :projects
 
-  get 'projects/set_active'
-
+  get 'set_active' => 'projects#set_active', as: :projects_set_active
+  get 'set_deactive' => 'projects#set_deactive', as: :projects_set_deactive
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
