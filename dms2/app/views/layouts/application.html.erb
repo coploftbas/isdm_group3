@@ -20,7 +20,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="active"><%= link_to "Project", root_path %></li>
         <% if user_signed_in? %>
-           <li><a href="">Welcome <%= current_user.email %>!</a></li>
+           <li><a href=""><%= current_user.email %></a></li>
            <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
         <% else %>
             <% link_to "Sign up", new_user_registration_path %>
