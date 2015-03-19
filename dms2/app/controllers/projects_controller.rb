@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @users = User.where.not(id: 1)
   end
 
   # GET /projects/new
@@ -61,6 +62,19 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def set_active
+    render :text=>'OK'
+    # if params[:ban] == '1'
+    #   User.find(params[:id]).update_attribute('delete_flg', 1)
+    #   @notice = 'Successfully banned'
+    # else
+    #   User.find(params[:id]).update_attribute('delete_flg', 0)
+    #   @notice = 'Successfully unbanned'
+    # end
+    # redirect_to authenticated_root_path, notice: @notice
+  end
+  helper_method :set_active
 
   private
     # Use callbacks to share common setup or constraints between actions.

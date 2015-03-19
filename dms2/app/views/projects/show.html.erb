@@ -1,15 +1,39 @@
 <p id="notice"><%= notice %></p>
-This is download page. 
-<!-- <p>
+<p>
   <strong>Project name:</strong>
   <%= @project.project_name %>
+</p>
+
+<p>
+  <strong>Project ID:</strong>
+  <%= @project.id %>
 </p>
 
 <p>
   <strong>Start date:</strong>
   <%= @project.start_date %>
 </p>
- -->
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Team Members</th>
+      <th>Assign</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.firstname+ " "+ user.lastname  %></td>
+        <td><%= link_to image_tag('off.jpg'), {action: :set_active, user_id: user.id, :assign => 1}, method: :get, :class =>'assign' %>
+                </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
