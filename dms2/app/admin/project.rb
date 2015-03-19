@@ -14,7 +14,30 @@ ActiveAdmin.register Project do
   #   permitted
   # end
 
-  permit_params :project_name, :created_by, :delete_flg, :create_at, :start_date, :end_date
+  index do
+    column :id
+    column :project_name
+    column :created_by_id
+    column :created_at
+    column :start_date
+    column :end_date
+    column :delete_flg
+    actions
+  end
+
+  form do |f|
+    f.inputs "Project Details" do
+      f.input :project_name
+      f.input :created_by_id
+      f.input :created_at
+      f.input :start_date
+      f.input :end_date
+      f.input :delete_flg
+    end
+    f.actions
+  end
+
+  permit_params :project_name, :created_by_id, :delete_flg, :created_at, :start_date, :end_date
 
 
 end

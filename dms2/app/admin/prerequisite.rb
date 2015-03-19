@@ -14,6 +14,22 @@ ActiveAdmin.register Prerequisite do
   #   permitted
   # end
 
-  permit_params :document_id, :prerequisite_id
+  index do
+    column :id
+    column :document_id_id
+    column :prerequisite_id_id
+    actions
+  end
+
+  form do |f|
+    f.inputs "Prerequisite Details" do
+      f.input :document_id_id
+      f.input :prerequisite_id_id
+    end
+    f.actions
+  end
+
+
+  permit_params :id, :document_id_id, :prerequisite_id_id
 
 end

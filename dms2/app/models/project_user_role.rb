@@ -1,5 +1,5 @@
 class ProjectUserRole < ActiveRecord::Base
-  belongs_to :user_id
-  belongs_to :role_id
-  belongs_to :project_id
+  belongs_to :user
+  belongs_to :role
+  belongs_to :project
 end

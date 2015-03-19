@@ -14,6 +14,17 @@ ActiveAdmin.register DocumentVersion do
   #   permitted
   # end
 
-  permit_params :document_name, :version_document_name, :file_location, :comment, :created_by, :created_at, :updated_by, :updated_at, :document_id
+  index do
+    column :id
+    column :document_name
+    column :version_document_name
+    column :file_location
+    column :created_by_id
+    column :updated_by_id
+    column :document_id_id
+    actions
+  end
+
+  permit_params :id, :document_name, :version_document_name, :file_location, :comment, :created_by_id, :created_at, :updated_by_id, :updated_at, :document_id_id
 
 end

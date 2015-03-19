@@ -14,6 +14,23 @@ ActiveAdmin.register ProjectUserRole do
   #   permitted
   # end
 
-  permit_params :user_id, :project_id, :role_id
+  index do
+    column :id
+    column :project_id_id
+    column :user_id_id
+    column :role_id_id
+    actions
+  end
+
+  form do |f|
+    f.inputs "ProjectUserRoles Details" do
+      f.input :project_id_id
+      f.input :user_id_id
+      f.input :role_id_id
+    end
+    f.actions
+  end
+
+  permit_params :user_id_id, :project_id_id, :role_id_id
 
 end

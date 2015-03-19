@@ -14,6 +14,28 @@ ActiveAdmin.register User do
   #   permitted
   # end
 
-  permit_params :email, :password, :firstname, :lastname, :delete_flg, :user_type_id
+  index do
+     column :id
+     column :email
+     column :firstname
+     column :lastname
+     column :user_type_id_id
+     column :delete_flg
+     actions
+  end
+
+  form do |f|
+    f.inputs "User Details" do
+      f.input :email
+      f.input :password
+      f.input :firstname
+      f.input :lastname
+      f.input :user_type_id_id
+      f.input :delete_flg
+    end
+    f.actions
+  end
+
+  permit_params  :email, :password, :firstname, :lastname, :delete_flg , :user_type_id_id
 
 end
