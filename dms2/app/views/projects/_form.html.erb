@@ -1,3 +1,4 @@
+<div class="col-md-6 col-md-offset-3">
 <%= form_for(@project) do |f| %>
   <% if @project.errors.any? %>
     <div id="error_explanation">
@@ -13,17 +14,18 @@
 
   <div class="field">
     <%= f.label :project_name %><br>
-    <%= f.text_field :project_name %>
-  </div>
+    <%= f.text_field :project_name, :class => "form-control", :placeholder => "Project name" %>
+  </div><br/>
   <div class="field">
     <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
-  </div>
+    <%= f.date_select :start_date, :class => "form-control", :style=>"width:100%;" %>
+  </div><br/>
   <div class="field">
     <%= f.label :end_date %><br>
-    <%= f.date_select :end_date %>
-  </div>
-  <div class="actions">
+    <%= f.date_select :end_date, :class => "form-control", :style=>"width:100%;" %>
+  </div><br/>
+  <div class=" col-md-6 col-md-offset-3 actions">
     <%= f.submit %>
   </div>
 <% end %>
+</div>

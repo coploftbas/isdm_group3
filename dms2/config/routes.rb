@@ -28,7 +28,8 @@ Rails.application.routes.draw do
   get 'set_active_manager' => 'projects#set_active_manager', as: :projects_set_active_manager
   get 'set_deactive_manager' => 'projects#set_deactive_manager', as: :projects_set_deactive_manager
 
-  get "projects/:id/assign_role" => "projects#assign_role", as: :projects_assign_role
+  get 'projects/:id/assign_role' => 'projects#assign_role', as: :projects_assign_role
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
