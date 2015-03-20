@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @users = User.where.not(id: 1)
+    @users = User.all
   end
 
   def assign_role

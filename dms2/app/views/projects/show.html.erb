@@ -48,33 +48,6 @@
       </tbody>
     </table>
 </div>-->
-<div class="panel panel-warning">
-    <div class="panel-heading"><strong>Team members assign</strong></div>
-    <div class="panel-body">
-        <p align="center">Team manager can assign team member for this project in this table.</p>
-    </div>
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th>Team Members</th>
-          <th>Assign</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <td><%= user.firstname+ " "+ user.lastname  %></td>
-            <% if (ProjectUserRole.find_by_user_id_id(user.id)).nil? %>
-                <td><%= link_to image_tag('off.jpg'), {:controller => :projects, :action=> :set_active, :project_id => @project.id, user_id: user.id}, :class =>'assign' %></td>
-            <% else %>
-                <td><%= link_to image_tag('on.jpg'), {:controller => :projects, :action=> :set_deactive, :project_id => @project.id, user_id: user.id}, :class =>'assign' %></td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-</div>
 
 <% link_to 'Edit', edit_project_path(@project) %>
 <% link_to 'Back', projects_path %>
