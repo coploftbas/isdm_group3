@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   end
 
   def assign_role
-     @users = User.where.not(id: 1)
+     @users = User.where.not(id: current_user.id)
   end
 
   # GET /projects/new
@@ -74,9 +74,9 @@ class ProjectsController < ApplicationController
     pur_save = ProjectUserRole.new(:project_id_id=>params[:project_id],:user_id_id=>params[:user_id],:role_id_id=>2)
 
     if pur_save.save
-      redirect_to project_path(:id=>params[:project_id]), :notice=> 'Assign member success'
+      redirect_to projects_assign_role_path(:id=>params[:project_id]), :notice=> 'Assign member success'
     else
-      redirect_to project_path(:id=>params[:project_id]), :alert=> 'Assign member failed'
+      redirect_to projects_assign_role_path(:id=>params[:project_id]), :alert=> 'Assign member failed'
     end
   end
 
@@ -84,9 +84,9 @@ class ProjectsController < ApplicationController
     pur_destroy = ProjectUserRole.find_by(:project_id_id=>params[:project_id],:user_id_id=>params[:user_id],:role_id_id=>2)
 
     if pur_destroy.destroy
-      redirect_to project_path(:id=>params[:project_id]), :notice=> 'Remove member success'
+      redirect_to projects_assign_role_path(:id=>params[:project_id]), :notice=> 'Remove member success'
     else
-      redirect_to project_path(:id=>params[:project_id]), :alert=> 'Remove member failed'
+      redirect_to projects_assign_role_path(:id=>params[:project_id]), :alert=> 'Remove member failed'
     end
   end
 
