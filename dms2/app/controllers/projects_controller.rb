@@ -15,7 +15,11 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     #@users = User.all
-    @users = User.where.not(id: current_user.id)
+    if current_user.role_id_id == 1
+      @users = User.where.not(id: current_user.id)
+    else
+      @users = User.where.not(id: current_user.id)
+    end
   end
 
   def assign_role
@@ -35,9 +39,12 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-
+    @project.created_by_id = current_user.id
+    @project.delete_flg = 0
     respond_to do |format|
       if @project.save
+        pur = ProjectUserRole.new(:project_id_id=>@project.id,:user_id_id=>current_user.id,:role_id_id=>1)
+        pur.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
