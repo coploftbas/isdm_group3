@@ -6,10 +6,11 @@
   <% if current_user.user_type_id_id == 1 %>
       <li role="presentation" class="active"><a href="#assign" aria-controls="assign" role="tab" data-toggle="tab">Assign team members</a></li>
       <li role="presentation"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Project details</a></li>
+      <li role="presentation"><a href="#members" aria-controls="members" role="tab" data-toggle="tab">All members</a></li>
       <li role="presentation"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">All documents</a></li>
   <% else %>
       <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Project details</a></li>
-      <li role="presentation"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">All documents</a></li>
+      <li role="presentation"><a href="#members" aria-controls="members" role="tab" data-toggle="tab">All members</a></li>
       <li role="presentation"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">All documents</a></li>
   <% end %>
 
@@ -19,11 +20,8 @@
   <% if current_user.user_type_id_id == 1 %>
   <!-- 1st tab -->
   <div role="tabpanel" class="tab-pane active" id="assign">
-    <div class="panel panel-warning">
+    <div class="panel panel-danger">
       <div class="panel-heading"><strong>Team members assign</strong></div>
-      <div class="panel-body">
-        <p align="center">Team manager can assign team member for this project in this table.</p>
-      </div>
       <table class="table table-bordered table-striped">
         <thead>
         <tr>
@@ -36,7 +34,7 @@
         <% @users.each do |user| %>
             <tr>
               <td><%= user.firstname+ " "+ user.lastname  %></td>
-              <% if (ProjectUserRole.find_by_user_id_id(user.id)).nil? %>
+              <% if (ProjectUserRole.find_by(:user_id_id => user.id, :project_id_id=> @project.id)).nil? %>
                   <td><%= link_to image_tag('off.jpg'), {:controller => :projects, :action=> :set_active, :project_id => @project.id, user_id: user.id}, :class =>'assign' %></td>
               <% else %>
                   <td><%= link_to image_tag('on.jpg'), {:controller => :projects, :action=> :set_deactive, :project_id => @project.id, user_id: user.id}, :class =>'assign' %></td>
@@ -97,12 +95,37 @@
 
   <% end %>
   <!-- 3rd tab -->
+  <div role="tabpanel" class="tab-pane" id="members">
+    <div class="panel panel-warning">
+      <div class="panel-heading"><strong>Member list</strong></div>
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Role</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% count = 1 %>
+        <% @members.each do |member| %>
+            <tr>
+              <td><%= count  %></td>
+              <td><%= User.find(member.user_id_id).firstname+ " "+ User.find(member.user_id_id).lastname %></td>
+              <td><%= Role.find(member.role_id_id).role_name %></td>
+            </tr>
+            <% count += 1 %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 4th tab -->
   <div role="tabpanel" class="tab-pane" id="documents">
     <div class="panel panel-success">
       <div class="panel-heading"><strong>Document list</strong></div>
-      <div class="panel-body">
-        <p align="center">List all documents.</p>
-      </div>
       <table class="table table-bordered table-striped">
         <thead>
         <tr>
@@ -116,12 +139,8 @@
         <% @users.each do |user| %>
             <tr>
               <td><%= user.firstname+ " "+ user.lastname  %></td>
-              <% if (ProjectUserRole.find_by_user_id_id(user.id)).nil? %>
-                  <td><%= link_to image_tag('off.jpg'), {:controller => :projects, :action=> :set_active, :project_id => @project.id, user_id: user.id}, :class =>'assign' %></td>
-              <% else %>
-                  <td><%= link_to image_tag('on.jpg'), {:controller => :projects, :action=> :set_deactive, :project_id => @project.id, user_id: user.id}, :class =>'assign' %></td>
-              <% end %>
-              <td>Updated date here please.</td>
+              <td>Version goes here ...</td>
+              <td>Updated date here ...</td>
             </tr>
         <% end %>
         </tbody>
@@ -130,34 +149,3 @@
   </div>
 
 </div>
-
-
-
-<!--
-<div class="panel panel-warning">
-  <div class="panel-heading"><strong>Team members assign</strong></div>
-  <div class="panel-body">
-    <p align="center">Team manager can assign team member for this project in this table.</p>
-  </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Team Manager</th>
-          <th>Assign</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr>
-            <td><% current_user.firstname+ " "+ current_user.lastname  %></td>
-            <% if (ProjectUserRole.find_by_user_id_id(current_user.id)).nil? %>
-                <td><% link_to image_tag('off.jpg'), {:controller => :projects, :action=> :set_active_manager, :project_id => @project.id, user_id: current_user.id}, :class =>'assign' %></td>
-            <% else %>
-                <td><% link_to image_tag('on.jpg'), {:controller => :projects, :action=> :set_deactive_manager, :project_id => @project.id, user_id: current_user.id}, :class =>'assign' %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-</div>-->
-
-<% link_to 'Edit', edit_project_path(@project) %>
-<% link_to 'Back', projects_path %>

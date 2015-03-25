@@ -9,17 +9,15 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
+    @current_user_work_on_project = ProjectUserRole.where(:user_id_id => current_user.id)
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
     #@users = User.all
-    if current_user.role_id_id == 1
-      @users = User.where.not(id: current_user.id)
-    else
-      @users = User.where.not(id: current_user.id)
-    end
+    @users = User.where.not(id: current_user.id)
+    @members = ProjectUserRole.where(:project_id_id => params[:id])
   end
 
   def assign_role
