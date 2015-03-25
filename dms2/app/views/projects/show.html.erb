@@ -3,69 +3,21 @@
 </div>
 
 <ul class="nav nav-tabs" role="tablist" id="myTab">
-  <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Project details</a></li>
-  <li role="presentation"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">All documents</a></li>
-  <li role="presentation"><a href="#assign" aria-controls="assign" role="tab" data-toggle="tab">Assign team members</a></li>
+  <% if current_user.user_type_id_id == 1 %>
+      <li role="presentation" class="active"><a href="#assign" aria-controls="assign" role="tab" data-toggle="tab">Assign team members</a></li>
+      <li role="presentation"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Project details</a></li>
+      <li role="presentation"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">All documents</a></li>
+  <% else %>
+      <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Project details</a></li>
+      <li role="presentation"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">All documents</a></li>
+  <% end %>
+
 </ul>
 
 <div class="tab-content">
+  <% if current_user.user_type_id_id == 1 %>
   <!-- 1st tab -->
-  <div role="tabpanel" class="tab-pane active" id="details">
-    <div class="panel panel-primary">
-      <!-- Default panel contents -->
-      <div class="panel-heading"><strong>Project Details</strong></div>
-
-      <table class="table table-bordered table-striped">
-        <tr>
-          <td><strong>Project name</strong></td>
-          <td><%= @project.project_name %></td>
-        </tr>
-        <tr>
-          <td><strong>Start date</strong></td>
-          <td><%= @project.start_date %></td>
-        </tr>
-        <tr>
-          <td><strong>Created by</strong></td>
-          <% mng = User.find(ProjectUserRole.find_by(:project_id_id=>@project.id,:role_id_id=>1).user_id_id) %>
-          <td><%= mng.firstname+' '+mng.lastname %></td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <!-- 2nd tab -->
-  <div role="tabpanel" class="tab-pane" id="documents">
-    <div class="panel panel-success">
-      <div class="panel-heading"><strong>Team members assign</strong></div>
-      <div class="panel-body">
-        <p align="center">Team manager can assign team member for this project in this table.</p>
-      </div>
-      <table class="table table-bordered table-striped">
-        <thead>
-        <tr>
-          <th>Team Members</th>
-          <th>Assign</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <% @users.each do |user| %>
-            <tr>
-              <td><%= user.firstname+ " "+ user.lastname  %></td>
-              <% if (ProjectUserRole.find_by_user_id_id(user.id)).nil? %>
-                  <td><%= link_to image_tag('off.jpg'), {:controller => :projects, :action=> :set_active, :project_id => @project.id, user_id: user.id}, :class =>'assign' %></td>
-              <% else %>
-                  <td><%= link_to image_tag('on.jpg'), {:controller => :projects, :action=> :set_deactive, :project_id => @project.id, user_id: user.id}, :class =>'assign' %></td>
-              <% end %>
-            </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- 3rd tab -->
-  <div role="tabpanel" class="tab-pane" id="assign">
+  <div role="tabpanel" class="tab-pane active" id="assign">
     <div class="panel panel-warning">
       <div class="panel-heading"><strong>Team members assign</strong></div>
       <div class="panel-body">
@@ -94,6 +46,89 @@
       </table>
     </div>
   </div>
+  <!-- 2nd tab -->
+  <div role="tabpanel" class="tab-pane" id="details">
+    <div class="panel panel-primary">
+      <!-- Default panel contents -->
+      <div class="panel-heading"><strong>Project Details</strong></div>
+
+      <table class="table table-bordered table-striped">
+        <tr>
+          <td><strong>Project name</strong></td>
+          <td><%= @project.project_name %></td>
+        </tr>
+        <tr>
+          <td><strong>Start date</strong></td>
+          <td><%= @project.start_date %></td>
+        </tr>
+        <tr>
+          <td><strong>Created by</strong></td>
+          <% mng = User.find(ProjectUserRole.find_by(:project_id_id=>@project.id,:role_id_id=>1).user_id_id) %>
+          <td><%= mng.firstname+' '+mng.lastname %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <% else %>
+
+      <!-- 2nd tab -->
+      <div role="tabpanel" class="tab-pane active" id="details">
+        <div class="panel panel-primary">
+          <!-- Default panel contents -->
+          <div class="panel-heading"><strong>Project Details</strong></div>
+
+          <table class="table table-bordered table-striped">
+            <tr>
+              <td><strong>Project name</strong></td>
+              <td><%= @project.project_name %></td>
+            </tr>
+            <tr>
+              <td><strong>Start date</strong></td>
+              <td><%= @project.start_date %></td>
+            </tr>
+            <tr>
+              <td><strong>Created by</strong></td>
+              <% mng = User.find(ProjectUserRole.find_by(:project_id_id=>@project.id,:role_id_id=>1).user_id_id) %>
+              <td><%= mng.firstname+' '+mng.lastname %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+  <% end %>
+  <!-- 3rd tab -->
+  <div role="tabpanel" class="tab-pane" id="documents">
+    <div class="panel panel-success">
+      <div class="panel-heading"><strong>Document list</strong></div>
+      <div class="panel-body">
+        <p align="center">List all documents.</p>
+      </div>
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>Document name</th>
+          <th>Version</th>
+          <th>Updated date</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @users.each do |user| %>
+            <tr>
+              <td><%= user.firstname+ " "+ user.lastname  %></td>
+              <% if (ProjectUserRole.find_by_user_id_id(user.id)).nil? %>
+                  <td><%= link_to image_tag('off.jpg'), {:controller => :projects, :action=> :set_active, :project_id => @project.id, user_id: user.id}, :class =>'assign' %></td>
+              <% else %>
+                  <td><%= link_to image_tag('on.jpg'), {:controller => :projects, :action=> :set_deactive, :project_id => @project.id, user_id: user.id}, :class =>'assign' %></td>
+              <% end %>
+              <td>Updated date here please.</td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>
 
 
