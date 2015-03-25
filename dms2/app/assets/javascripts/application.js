@@ -14,3 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+$(function () {
+    $('#myTab a:last').tab('show')
+})
