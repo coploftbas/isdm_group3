@@ -16,29 +16,33 @@
     <%= f.text_field :document_name %>
   </div>
   <div class="field">
-    <%= f.label :version_document_name %><br>
-    <%= f.text_field :version_document_name %>
-  </div>
-  <div class="field">
-    <%= f.label :file_location %><br>
-    <%= f.text_area :file_location %>
+    <% f.label :version_document_name %><br>
+    <%= f.hidden_field :version_document_name %>
   </div>
   <div class="field">
     <%= f.label :comment %><br>
     <%= f.text_area :comment %>
   </div>
   <div class="field">
-    <%= f.label :created_by_id %><br>
-    <%= f.text_field :created_by_id %>
+    <% f.label :created_by_id %><br>
+    <%= f.hidden_field :created_by_id %>
   </div>
   <div class="field">
-    <%= f.label :updated_by_id %><br>
-    <%= f.text_field :updated_by_id %>
+    <% f.label :updated_by_id %><br>
+    <%= f.hidden_field :updated_by_id, :value=> current_user.id %>
   </div>
   <div class="field">
-    <%= f.label :document_id_id %><br>
-    <%= f.text_field :document_id_id %>
+    <% f.label :document_id_id %><br>
+    <%= f.hidden_field :document_id_id %>
   </div>
+    <div class="field">
+      <%= f.label :project_id %><br>
+      <%= f.text_field :project_id, :value=>params[:projectId] %>
+    </div>
+    <div class="field">
+      <%= f.label :file, 'Please select a template document to upload:' %><br>
+      <%= f.file_field :file %>
+    </div>
   <div class="actions">
     <%= f.submit %>
   </div>

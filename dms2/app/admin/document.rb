@@ -17,7 +17,7 @@ ActiveAdmin.register Document do
   index do
     column :id
     column :name
-    column :project_id_id
+    column :project_id
     #column :comment
     column :file_location
     column :created_by_id
@@ -30,18 +30,16 @@ ActiveAdmin.register Document do
   form do |f|
     f.inputs "Document Details" do
       f.input :name
-      f.input :project_id_id
+      f.input :project_id
       f.input :comment
       f.input :file_location
       f.input :created_by_id
-      f.input :created_at
       f.input :updated_by_id
-      f.input :updated_at
     end
     f.actions
   end
 
 
-  permit_params :name, :comment, :file_location, :created_by_id, :created_at, :updated_by_id, :updated_at, :project_id_id
+  permit_params :name, :comment, :file_location, :created_by_id, :created_at, :updated_by_id, :updated_at, :project_id
 
 end

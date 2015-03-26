@@ -136,15 +136,16 @@
         </thead>
 
         <tbody>
-        <% @users.each do |user| %>
+        <% @documents.each do |doc| %>
             <tr>
-              <td><%= user.firstname+ " "+ user.lastname  %></td>
+              <td><%= doc.name  %></td>
               <td>Version goes here ...</td>
               <td>Updated date here ...</td>
             </tr>
         <% end %>
         </tbody>
       </table>
+      <%= link_to "Upload File",newDocVer_path(@project.id) %>
     </div>
   </div>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318154545) do
+ActiveRecord::Schema.define(version: 20150325182933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,10 +59,16 @@ ActiveRecord::Schema.define(version: 20150318154545) do
     t.integer  "document_id_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.integer  "project_id"
   end
 
   add_index "document_versions", ["created_by_id"], name: "index_document_versions_on_created_by_id", using: :btree
   add_index "document_versions", ["document_id_id"], name: "index_document_versions_on_document_id_id", using: :btree
+  add_index "document_versions", ["project_id"], name: "index_document_versions_on_project_id", using: :btree
   add_index "document_versions", ["updated_by_id"], name: "index_document_versions_on_updated_by_id", using: :btree
 
   create_table "documents", force: true do |t|
@@ -71,13 +77,17 @@ ActiveRecord::Schema.define(version: 20150318154545) do
     t.text     "file_location"
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
-    t.integer  "project_id_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "documents", ["created_by_id"], name: "index_documents_on_created_by_id", using: :btree
-  add_index "documents", ["project_id_id"], name: "index_documents_on_project_id_id", using: :btree
+  add_index "documents", ["project_id"], name: "index_documents_on_project_id", using: :btree
   add_index "documents", ["updated_by_id"], name: "index_documents_on_updated_by_id", using: :btree
 
   create_table "prerequisites", force: true do |t|
