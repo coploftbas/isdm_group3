@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
     #@users = User.all
     @users = User.where.not(id: current_user.id)
     @members = ProjectUserRole.where(:project_id_id => params[:id])
-    @documents = Document.all
+    @documents = Document.order(:id).all
     #@new_document_version = DocumentVersion.new
   end
 
