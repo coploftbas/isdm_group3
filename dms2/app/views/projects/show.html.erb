@@ -136,11 +136,11 @@
         </thead>
 
         <tbody>
-        <% @users.each do |user| %>
+        <% @documents.each do |doc| %>
             <tr>
-              <td><%= user.firstname+ " "+ user.lastname  %></td>
+              <td><%= doc.name  %></td>
               <td>Version goes here ...</td>
-              <td>Updated date here ...</td>
+              <td><%= link_to "Upload File",newDocVer_path(:projectId => @project.id, :docId => doc.id) %></td>
             </tr>
         <% end %>
         </tbody>

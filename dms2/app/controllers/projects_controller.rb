@@ -25,6 +25,8 @@ class ProjectsController < ApplicationController
     #@users = User.all
     @users = User.where.not(id: current_user.id)
     @members = ProjectUserRole.where(:project_id_id => params[:id])
+    @documents = Document.all
+    @new_document_version = DocumentVersion.new
   end
 
   def assign_role
@@ -83,6 +85,20 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def upload_doc
+
+    #params[:file].each { |fil|
+    #  tmp = DocumentVersion.new(file: fil)
+    #  tmp.project_id = params[:document_version][:project_id]
+    #  tmp.save
+    #}
+    tmp = DocumentVersion.new(document_version_params)
+    tmp.project_id = params[:document_version][:project_id]
+    #binding.pry#tmp.document_name = params[:document_version][:file]
+    tmp.save
+    redirect_to project_path(:id=>params[:document_version][:project_id])
+  end
+
   def set_active
     pur_save = ProjectUserRole.new(:project_id_id=>params[:project_id],:user_id_id=>params[:user_id],:role_id_id=>2)
 
@@ -134,4 +150,8 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:project_name, :created_by, :delete_flg, :start_date, :end_date)
     end
+
+  def document_version_params
+    params.require(:document_version).permit(:file)
+  end
 end
