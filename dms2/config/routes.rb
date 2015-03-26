@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get 'projects/:id/assign_role' => 'projects#assign_role', as: :projects_assign_role
 
   get 'new_document_version/:projectId/:docId' => 'document_versions#new', as: :newDocVer
+  get 'view_document_version/:projectId/:docId' => 'document_versions#index', as: :docVer
 
   get 'upload_document' => 'projects#upload_doc'
 

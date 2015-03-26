@@ -47,7 +47,7 @@
   </div>
   <!-- 2nd tab -->
   <div role="tabpanel" class="tab-pane" id="details">
-    <div class="panel panel-primary">
+    <div class="panel panel-info">
       <div class="panel-heading"><strong>Project Details</strong></div>
 
       <table class="table table-bordered table-striped">
@@ -71,7 +71,7 @@
 
       <!-- 2nd tab -->
       <div role="tabpanel" class="tab-pane active" id="details">
-        <div class="panel panel-primary">
+        <div class="panel panel-info">
           <!-- Default panel contents -->
           <div class="panel-heading"><strong>Project Details</strong></div>
 
@@ -134,7 +134,7 @@
           <th>Version</th>
           <th>Updated at</th>
           <th>Updated by</th>
-          <th colspan="2">Actions</th>
+          <th colspan="3">Actions</th>
         </tr>
         </thead>
 
@@ -148,7 +148,8 @@
                 <td>0</td>
                 <td>-</td>
                 <td>System</td>
-                <td><%=  link_to 'Download', root_url+'templates/'+doc.file_location %></td>
+                <td><a href='#' class = "btn btn-info" style = "width:100%;">History</a></td>
+                <td><%=  link_to 'Download', root_url+'templates/'+doc.file_location ,:class => "btn btn-warning", :style => "width:100%;"%></td>
               <% else %>
                 <td><%= max_version %></td>
                 <% tmp_dv = DocumentVersion.where(:project_id => @project.id, :document_id_id => doc.id, :version=> max_version) %>
@@ -156,10 +157,11 @@
                     <td><%= my_dv.updated_at %></td>
                     <% usr2 =  User.find(my_dv.updated_by_id) %>
                     <td><%= usr2.firstname+" "+usr2.lastname %></td>
-                    <td><%=  link_to 'Download', my_dv.file.url%></td>
+                    <td><%= link_to 'History',docVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-info", :style => "width:100%;" %></td>
+                    <td><%= link_to 'Download', my_dv.file.url,:class => "btn btn-warning", :style => "width:100%;" %></td>
                   <% end %>
               <% end%>
-              <td><%= link_to 'Upload',newDocVer_path(:projectId => @project.id, :docId => doc.id) %></td>
+              <td><%= link_to 'Upload',newDocVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-danger", :style => "width:100%;" %></td>
             </tr>
         <% end %>
         </tbody>
