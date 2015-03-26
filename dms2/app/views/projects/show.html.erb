@@ -139,7 +139,11 @@
         <% @documents.each do |doc| %>
             <tr>
               <td><%= doc.name  %></td>
-              <td><%= DocumentVersion.where(:project_id => @project.id, :document_id_id => doc.id).maximum("version")%></td>
+              <% if (DocumentVersion.where(:project_id => @project.id, :document_id_id => doc.id).maximum("version") == nil) %>
+                <td>0</td>
+              <% else %>
+                <td><%= DocumentVersion.where(:project_id => @project.id, :document_id_id => doc.id).maximum("version")%></td>
+              <% end%>
               <!-- <td>Version goes here ...</td> -->
               <td><%= link_to "Upload File",newDocVer_path(:projectId => @project.id, :docId => doc.id) %></td>
             </tr>
