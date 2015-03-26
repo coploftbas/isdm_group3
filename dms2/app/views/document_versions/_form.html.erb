@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :document_name %><br>
-    <%= f.text_field :document_name %>
+    <%= f.text_field :document_name , :value => Document.find(params[:docId]).name %>
   </div>
   <div class="field">
     <% f.label :version_document_name %><br>
@@ -32,8 +32,8 @@
     <%= f.hidden_field :updated_by_id, :value=> current_user.id %>
   </div>
   <div class="field">
-    <% f.label :document_id_id %><br>
-    <%= f.hidden_field :document_id_id %>
+    <%= f.label :document_id_id %><br>
+    <%= f.text_field :document_id_id, :value => params[:docId] %>
   </div>
     <div class="field">
       <%= f.label :project_id %><br>

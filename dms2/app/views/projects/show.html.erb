@@ -140,12 +140,11 @@
             <tr>
               <td><%= doc.name  %></td>
               <td>Version goes here ...</td>
-              <td>Updated date here ...</td>
+              <td><%= link_to "Upload File",newDocVer_path(:projectId => @project.id, :docId => doc.id) %></td>
             </tr>
         <% end %>
         </tbody>
       </table>
-      <%= link_to "Upload File",newDocVer_path(@project.id) %>
     </div>
   </div>
 

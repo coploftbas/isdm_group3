@@ -17,9 +17,9 @@ ActiveAdmin.register DocumentVersion do
   index do
     column :id
     column :document_name
-    column :version_document_name
-    column :file_location
-    column :created_by_id
+    #column :version_document_name
+    #column :file_location
+    #column :created_by_id
     column :updated_by_id
     column :document_id_id
     actions
