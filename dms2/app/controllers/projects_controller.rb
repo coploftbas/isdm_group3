@@ -10,7 +10,9 @@ class ProjectsController < ApplicationController
   
   def index
     @projects = Project.all
-    @current_user_work_on_project = ProjectUserRole.where(:user_id_id => current_user.id)
+    # @current_user_work_on_project = ProjectUserRole.where(:user_id_id => current_user.id)
+    @current_user_work_on_project = Project.joins("LEFT JOIN project_user_roles ON(projects.id = project_user_roles.project_id_id)").select("projects.id, projects.project_name, project_user_roles.*").where("project_user_roles.user_id_id = ?", current_user.id).search(params[:search])
+ 
   end
   #   def index
   #   @projects = Project.joins("LEFT JOIN project_user_roles ON(projects.id = project_user_roles.project_id_id)").select("projects.id, projects.project_name, project_user_roles.*").where("project_user_roles.user_id_id = ?", current_user.id)
