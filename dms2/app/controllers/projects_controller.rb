@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
     @users = User.where.not(id: current_user.id)
     @members = ProjectUserRole.where(:project_id_id => params[:id])
     @documents = Document.all
-    @new_document_version = DocumentVersion.new
+    #@new_document_version = DocumentVersion.new
   end
 
   def assign_role
@@ -85,15 +85,8 @@ class ProjectsController < ApplicationController
   end
 
   def upload_doc
-
-    #params[:file].each { |fil|
-    #  tmp = DocumentVersion.new(file: fil)
-    #  tmp.project_id = params[:document_version][:project_id]
-    #  tmp.save
-    #}
     tmp = DocumentVersion.new(document_version_params)
     tmp.project_id = params[:document_version][:project_id]
-    #binding.pry#tmp.document_name = params[:document_version][:file]
     tmp.save
     redirect_to project_path(:id=>params[:document_version][:project_id])
   end

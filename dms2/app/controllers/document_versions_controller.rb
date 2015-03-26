@@ -22,6 +22,15 @@ class DocumentVersionsController < InheritedResources::Base
     @document_version.document_name = params[:document_version][:document_name]
     @document_version.comment = params[:document_version][:comment]
     @document_version.project_id = params[:document_version][:project_id]
+    @document_version.document_id_id = params[:document_version][:document_id_id]
+    max_version = DocumentVersion.where(:project_id => params[:document_version][:project_id], :document_id_id => params[:document_version][:document_id_id]).maximum(:version)
+    max_version = max_version.to_i
+    #binding.pry
+    #if max_version.nil?
+    #  @document_version.version = 1
+    #else
+      @document_version.version = max_version+1
+    #end
     respond_to do |format|
       if @document_version.save
         #binding.pry
