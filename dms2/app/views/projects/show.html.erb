@@ -60,7 +60,7 @@
           <td><%= @project.start_date %></td>
         </tr>
         <tr>
-          <td><strong>Created by</strong></td>
+          <td><strong>Project Manager</strong></td>
           <% mng = User.find(ProjectUserRole.find_by(:project_id_id=>@project.id,:role_id_id=>1).user_id_id) %>
           <td><%= mng.firstname+' '+mng.lastname %></td>
         </tr>
@@ -85,7 +85,7 @@
               <td><%= @project.start_date %></td>
             </tr>
             <tr>
-              <td><strong>Created by</strong></td>
+              <td><strong>Project Manager</strong></td>
               <% mng = User.find(ProjectUserRole.find_by(:project_id_id=>@project.id,:role_id_id=>1).user_id_id) %>
               <td><%= mng.firstname+' '+mng.lastname %></td>
             </tr>
@@ -129,25 +129,33 @@
       <table class="table table-bordered table-striped">
         <thead>
         <tr>
+          <th>#</th>
           <th>Document name</th>
           <th>Version</th>
-          <th colspan="2">Updated date</th>
+          <th>Updated at</th>
+          <th>Updated by</th>
+          <th colspan="2">Actions</th>
         </tr>
         </thead>
 
         <tbody>
         <% @documents.each do |doc| %>
             <tr>
+              <td><%= doc.id %></td>
               <td><%= doc.name  %></td>
               <% max_version = DocumentVersion.where(:project_id => @project.id, :document_id_id => doc.id).maximum(:version) %>
               <% if max_version.nil? %>
                 <td>0</td>
-                  <% #binding.pry %>
+                <td>-</td>
+                <td>System</td>
                 <td><%=  link_to 'Download', root_url+'templates/'+doc.file_location %></td>
               <% else %>
                 <td><%= max_version %></td>
                 <% tmp_dv = DocumentVersion.where(:project_id => @project.id, :document_id_id => doc.id, :version=> max_version) %>
                   <% tmp_dv.each do |my_dv| %>
+                    <td><%= my_dv.updated_at %></td>
+                    <% usr2 =  User.find(my_dv.updated_by_id) %>
+                    <td><%= usr2.firstname+" "+usr2.lastname %></td>
                     <td><%=  link_to 'Download', my_dv.file.url%></td>
                   <% end %>
               <% end%>
@@ -160,3 +168,7 @@
   </div>
 
 </div>
+
+<hr/>
+<%= image_tag("quality_workflow.png", :alt => "Quality Management Workflow", :style=>"width:100%;")  %>
+<hr/>
