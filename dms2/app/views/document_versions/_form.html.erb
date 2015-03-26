@@ -1,3 +1,4 @@
+<div class="col-md-6 col-md-offset-3">
 <%= form_for(@document_version) do |f| %>
   <% if @document_version.errors.any? %>
     <div id="error_explanation">
@@ -12,8 +13,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :document_name %><br>
-    <%= f.text_field :document_name , :value => Document.find(params[:docId]).name %>
+    <% f.label :document_name %><br>
+    <%= f.hidden_field :document_name , :value => Document.find(params[:docId]).name %>
   </div>
   <div class="field">
     <% f.label :version_document_name %><br>
@@ -21,7 +22,7 @@
   </div>
   <div class="field">
     <%= f.label :comment %><br>
-    <%= f.text_area :comment %>
+    <%= f.text_area :comment, :class=>'form-control', :placeholder => "Please comment the part that you've done here ..." %>
   </div>
   <div class="field">
     <% f.label :created_by_id %><br>
@@ -32,18 +33,19 @@
     <%= f.hidden_field :updated_by_id, :value=> current_user.id %>
   </div>
   <div class="field">
-    <%= f.label :document_id_id %><br>
-    <%= f.text_field :document_id_id, :value => params[:docId] %>
+    <% f.label :document_id_id %><br>
+    <%= f.hidden_field :document_id_id, :value => params[:docId] %>
   </div>
     <div class="field">
-      <%= f.label :project_id %><br>
-      <%= f.text_field :project_id, :value=>params[:projectId] %>
+      <% f.label :project_id %><br>
+      <%= f.hidden_field :project_id, :value=>params[:projectId] %>
     </div>
     <div class="field">
-      <%= f.label :file, 'Please select a template document to upload:' %><br>
-      <%= f.file_field :file %>
+      <%= f.label :file, 'Please select a template document to upload:' %><br/><br/>
+      <%= f.file_field :file, :class=>'form-control'%>
     </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit  :class=>'btn btn-success', :style=>'width:100%' %>
   </div>
 <% end %>
+</div>

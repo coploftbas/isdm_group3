@@ -142,12 +142,13 @@
               <% max_version = DocumentVersion.where(:project_id => @project.id, :document_id_id => doc.id).maximum(:version) %>
               <% if max_version.nil? %>
                 <td>0</td>
-                <td><%=  link_to 'Download', '#' %></td>
+                  <% #binding.pry %>
+                <td><%=  link_to 'Download', root_url+'templates/'+doc.file_location %></td>
               <% else %>
                 <td><%= max_version %></td>
                 <% tmp_dv = DocumentVersion.where(:project_id => @project.id, :document_id_id => doc.id, :version=> max_version) %>
                   <% tmp_dv.each do |my_dv| %>
-                    <td><%=  link_to 'Download', my_dv.file.url %></td>
+                    <td><%=  link_to 'Download', my_dv.file.url%></td>
                   <% end %>
               <% end%>
               <td><%= link_to 'Upload',newDocVer_path(:projectId => @project.id, :docId => doc.id) %></td>
