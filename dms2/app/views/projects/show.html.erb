@@ -148,7 +148,7 @@
                 <td>0</td>
                 <td>-</td>
                 <td>System</td>
-                <td><a href='#' class = "btn btn-info" style = "width:100%;">History</a></td>
+                <td><a href='#' class = "btn btn-info disabled" style = "width:100%;">All Versions</a></td>
                 <td><%=  link_to 'Download Lastest Version', root_url+'templates/'+doc.file_location ,:class => "btn btn-warning", :style => "width:100%;"%></td>
               <% else %>
                 <td><%= max_version %></td>
@@ -157,7 +157,7 @@
                     <td><%= my_dv.updated_at %></td>
                     <% usr2 =  User.find(my_dv.updated_by_id) %>
                     <td><%= usr2.firstname+" "+usr2.lastname %></td>
-                    <td><%= link_to 'History',docVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-info", :style => "width:100%;" %></td>
+                    <td><%= link_to 'All Versions',docVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-info", :style => "width:100%;" %></td>
                     <td><%= link_to 'Download Lastest Version', my_dv.file.url,:class => "btn btn-warning", :style => "width:100%;" %></td>
                   <% end %>
               <% end%>
