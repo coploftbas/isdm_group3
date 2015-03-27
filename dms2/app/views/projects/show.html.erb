@@ -35,9 +35,9 @@
             <tr>
               <td><%= user.firstname+ " "+ user.lastname  %></td>
               <% if (ProjectUserRole.find_by(:user_id_id => user.id, :project_id_id=> @project.id)).nil? %>
-                  <td><%= link_to image_tag('off.jpg'), {:controller => :projects, :action=> :set_active, :project_id => @project.id, user_id: user.id}, :class =>'assign' %></td>
+                  <td><%= link_to "Assign", {:controller => :projects, :action=> :set_active, :project_id => @project.id, user_id: user.id}, :class =>'btn btn-success', :style=>"width:40%;" %></td>
               <% else %>
-                  <td><%= link_to image_tag('on.jpg'), {:controller => :projects, :action=> :set_deactive, :project_id => @project.id, user_id: user.id}, :class =>'assign' %></td>
+                  <td><%= link_to "Remove", {:controller => :projects, :action=> :set_deactive, :project_id => @project.id, user_id: user.id}, :class =>'btn btn-danger', :style=>"width:40%;" %></td>
               <% end %>
             </tr>
         <% end %>
