@@ -199,7 +199,7 @@
                 <%= link_to document.name , docVer_path(:projectId => @project.id, :docId => document.id)%>
                 <% end %>
               </td>
-              <% elsif (document.name) == 'ProjectManagementPlan' %>
+              <% elsif (document.name) == 'Project Management Plan' %>
               <td><%= "----------------------------------------------------------------------->" %></td>
               <% elsif (document.name) == 'Organizational Process Assets' %>
               <td><%= "----------------------------------------------------------------->" %></td>
@@ -209,7 +209,7 @@
 
               <% if(document.templateVersion == '8.3') %>
                 <td><%= link_to document.name , docVer_path(:projectId => @project.id, :docId => document.id) %></td>
-              <% elsif (document.name) == 'ProjectManagementPlan' %>
+              <% elsif (document.name) == 'Project Management Plan' %>
                 <td><%= document.name %></td>
               <% elsif (document.name) == 'Organizational Process Assets' %>
                 <td><%= document.name %></td>
