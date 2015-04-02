@@ -59,12 +59,12 @@ ActiveRecord::Schema.define(version: 20150402082620) do
     t.integer  "document_id_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "project_id"
-    t.integer  "version"
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.integer  "project_id"
+    t.integer  "version"
   end
 
   add_index "document_versions", ["created_by_id"], name: "index_document_versions_on_created_by_id", using: :btree
@@ -81,6 +81,10 @@ ActiveRecord::Schema.define(version: 20150402082620) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "project_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
     t.text     "templateVersion"
   end
 

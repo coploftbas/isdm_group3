@@ -195,15 +195,15 @@
 
 
               <% if(document.templateVersion == '8.2') %>
-              <td><% if (document.name =='Quality Metrics' || document.name =='Project Documents')%>
+              <td><% if (document.name.downcase =='Quality Metrics'.downcase || document.name =='Project Documents'.downcase)%>
                 <%= link_to document.name , docVer_path(:projectId => @project.id, :docId => document.id) %><%= " "+ "------------------------->" %>
                 <% else %>
                 <%= link_to document.name , docVer_path(:projectId => @project.id, :docId => document.id)%>
                 <% end %>
               </td>
-              <% elsif (document.name) == 'Project Management Plan' %>
+              <% elsif (document.name).downcase == 'Project Management Plan'.downcase %>
               <td><%= "----------------------------------------------------------------------->" %></td>
-              <% elsif (document.name) == 'Organizational Process Assets' %>
+              <% elsif (document.name).downcase == 'Organizational Process Assets'.downcase %>
               <td><%= "----------------------------------------------------------------->" %></td>
               <% else %>
               <td></td>
@@ -211,13 +211,13 @@
 
               <% if(document.templateVersion == '8.3') %>
                 <td><%= link_to document.name , docVer_path(:projectId => @project.id, :docId => document.id) %></td>
-              <% elsif (document.name) == 'Project Management Plan' %>
+              <% elsif (document.name).downcase == 'Project Management Plan'.downcase %>
                 <td><%= document.name %></td>
-              <% elsif (document.name) == 'Organizational Process Assets' %>
+              <% elsif (document.name).downcase == 'Organizational Process Assets'.downcase %>
                 <td><%= document.name %></td>
-              <% elsif (document.name) == 'Quality Metrics' %>
+              <% elsif (document.name).downcase == 'Quality Metrics'.downcase %>
                 <td><%= document.name %></td>
-              <% elsif (document.name) == 'Project Documents' %>
+              <% elsif (document.name).downcase == 'Project Documents'.downcase %>
                 <td><%= document.name %></td>
               <% else %>
               <td></td>
@@ -227,4 +227,8 @@
         </tbody>
       </table>
     </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> c790730a882652e529e3467f30e65e6705b5219d
