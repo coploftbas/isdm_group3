@@ -3,7 +3,7 @@
 </div>
 
 <ul class="nav nav-tabs" role="tablist" id="myTab">
-  <% if current_user.user_type_id_id == 1 %>
+  <% if ProjectUserRole.find_by(:user_id_id => current_user.id, :project_id_id => @project.id).role_id_id == 1 %>
       <li role="presentation" class="active"><a href="#assign" aria-controls="assign" role="tab" data-toggle="tab">Assign team members</a></li>
       <li role="presentation"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Project details</a></li>
       <li role="presentation"><a href="#members" aria-controls="members" role="tab" data-toggle="tab">All members</a></li>
@@ -17,7 +17,7 @@
 </ul>
 
 <div class="tab-content">
-  <% if current_user.user_type_id_id == 1 %>
+  <% if ProjectUserRole.find_by(:user_id_id => current_user.id, :project_id_id => @project.id).role_id_id == 1 %>
   <!-- 1st tab -->
   <div role="tabpanel" class="tab-pane active" id="assign">
     <div class="panel panel-danger">
