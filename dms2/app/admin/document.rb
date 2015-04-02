@@ -24,19 +24,21 @@ ActiveAdmin.register Document do
     column :created_at
     #column :updated_by_id
     column :updated_at
+    column :templateVersion
     actions
   end
 
   form do |f|
     f.inputs "Document Version Details" do
       f.input :name
-      f.input :comment
       f.input :file_location
+      f.input :templateVersion
+      f.input :comment
     end
     f.actions
   end
 
 
-  permit_params :name, :comment, :file_location, :created_by_id, :created_at, :updated_by_id, :updated_at, :project_id
+  permit_params :name, :comment, :file_location, :created_by_id, :created_at, :updated_by_id, :updated_at, :project_id, :templateVersion
 
 end
