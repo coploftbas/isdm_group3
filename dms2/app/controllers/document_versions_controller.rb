@@ -29,7 +29,12 @@ class DocumentVersionsController < InheritedResources::Base
     #if max_version.nil?
     #  @document_version.version = 1
     #else
-      @document_version.version = max_version+1
+    @document_version.version = max_version+1
+    tmp_name = Document.find(@document_version.document_id_id).file_location
+    tmp_name = tmp_name[0,tmp_name.length-5]
+    tmp_name = @document_version.project_id.to_s+'_'+tmp_name+'_v'+@document_version.version.to_s
+    #binding.pry
+    @document_version.setDocumentName(tmp_name)
     #end
     respond_to do |format|
       if @document_version.save
