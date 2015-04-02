@@ -26,6 +26,7 @@
         <thead>
         <tr>
           <th>Team Members</th>
+          <th>Designation</th>
           <th>Assign</th>
         </tr>
         </thead>
@@ -34,6 +35,7 @@
         <% @users.each do |user| %>
             <tr>
               <td><%= user.firstname+ " "+ user.lastname  %></td>
+              <td><%= user.designation  %></td>
               <% if (ProjectUserRole.find_by(:user_id_id => user.id, :project_id_id=> @project.id)).nil? %>
                   <td><%= link_to "Assign", {:controller => :projects, :action=> :set_active, :project_id => @project.id, user_id: user.id}, :class =>'btn btn-success', :style=>"width:40%;" %></td>
               <% else %>
@@ -226,7 +228,3 @@
       </table>
     </div>
 </div>
-
-  <hr/>
-<%= image_tag("quality_workflow.png", :alt => "Quality Management Workflow", :style=>"width:100%;")  %>
-<hr/>

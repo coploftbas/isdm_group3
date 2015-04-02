@@ -21,8 +21,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    #@users = User.all
-    @users = User.where.not(id: current_user.id)
+    # @users = User.where.not(id: current_user.id)
+    @users = User.joins("LEFT JOIN user_types ON(users.user_type_id_id = user_types.id)").select("*").where.not(id: current_user.id)
     @members = ProjectUserRole.where(:project_id_id => params[:id])
     @documents = Document.order(:id).all
     #@new_document_version = DocumentVersion.new
