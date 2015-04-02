@@ -171,6 +171,62 @@
 
 </div>
 
-<hr/>
+<div role="tabpanel" class="tab-pane active" id="assign">
+    <div class="panel panel-success">
+      <div class="panel-heading"><strong>Quality Management Workflow</strong></div>
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th style = "width: 33%; ">8.1</th>
+          <th style = "width: 33%; ">8.2</th>
+          <th style = "width: 33%; ">8.3</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @documents.each do |document| %>
+            <tr>
+              <% if(document.templateVersion == '8.1') %>
+              <td><%= link_to document.name , docVer_path(:projectId => @project.id, :docId => document.id) %></td>
+              <% else %>
+              <td></td>
+              <% end %>
+
+
+              <% if(document.templateVersion == '8.2') %>
+              <td><% if (document.name =='Quality Metrics' || document.name =='Project Documents')%>
+                <%= link_to document.name , docVer_path(:projectId => @project.id, :docId => document.id) %><%= " "+ "------------------------->" %>
+                <% else %>
+                <%= link_to document.name , docVer_path(:projectId => @project.id, :docId => document.id)%>
+                <% end %>
+              </td>
+              <% elsif (document.name) == 'ProjectManagementPlan' %>
+              <td><%= "----------------------------------------------------------------------->" %></td>
+              <% elsif (document.name) == 'Organizational Process Assets' %>
+              <td><%= "----------------------------------------------------------------->" %></td>
+              <% else %>
+              <td></td>
+              <% end %>
+
+              <% if(document.templateVersion == '8.3') %>
+                <td><%= link_to document.name , docVer_path(:projectId => @project.id, :docId => document.id) %></td>
+              <% elsif (document.name) == 'ProjectManagementPlan' %>
+                <td><%= document.name %></td>
+              <% elsif (document.name) == 'Organizational Process Assets' %>
+                <td><%= document.name %></td>
+              <% elsif (document.name) == 'Quality Metrics' %>
+                <td><%= document.name %></td>
+              <% elsif (document.name) == 'Project Documents' %>
+                <td><%= document.name %></td>
+              <% else %>
+              <td></td>
+              <% end %>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+  <hr/>
 <%= image_tag("quality_workflow.png", :alt => "Quality Management Workflow", :style=>"width:100%;")  %>
 <hr/>
