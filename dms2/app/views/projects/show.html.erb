@@ -35,7 +35,7 @@
         <% @users.each do |user| %>
             <tr>
               <td><%= user.firstname+ " "+ user.lastname  %></td>
-              <td><%= user.designation  %></td>
+              <td><%= UserType.find(user.user_type_id_id).designation  %></td>
               <% if (ProjectUserRole.find_by(:user_id_id => user.id, :project_id_id=> @project.id)).nil? %>
                   <td><%= link_to "Assign", {:controller => :projects, :action=> :set_active, :project_id => @project.id, user_id: user.id}, :class =>'btn btn-success', :style=>"width:40%;" %></td>
               <% else %>

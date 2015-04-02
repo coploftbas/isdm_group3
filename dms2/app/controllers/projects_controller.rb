@@ -13,19 +13,13 @@ class ProjectsController < ApplicationController
     # @current_user_work_on_project = ProjectUserRole.where(:user_id_id => current_user.id)
     @current_user_work_on_project = Project.joins("LEFT JOIN project_user_roles ON(projects.id = project_user_roles.project_id_id)").select("projects.id, projects.project_name, project_user_roles.*").where("project_user_roles.user_id_id = ?", current_user.id).search(params[:search])
   end
-  #   def index
-  #   @projects = Project.joins("LEFT JOIN project_user_roles ON(projects.id = project_user_roles.project_id_id)").select("projects.id, projects.project_name, project_user_roles.*").where("project_user_roles.user_id_id = ?", current_user.id)
-  #   @current_user_work_on_project = Project.joins("LEFT JOIN project_user_roles ON(projects.id = project_user_roles.project_id_id)").select("projects.id, projects.project_name, project_user_roles.*").where("project_user_roles.user_id_id = ?", current_user.id)
-  # end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
-    # @users = User.where.not(id: current_user.id)
-    @users = User.joins("LEFT JOIN user_types ON(users.user_type_id_id = user_types.id)").select("*").where.not(id: current_user.id).order('user_types.designation ASC')
+    @users = User.where.not(id: current_user.id)
     @members = ProjectUserRole.where(:project_id_id => params[:id])
     @documents = Document.order(:id).all
-    #@new_document_version = DocumentVersion.new
   end
 
   def assign_role
@@ -111,27 +105,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-    def set_active_manager
-    pur_save = ProjectUserRole.new(:project_id_id=>params[:project_id],:user_id_id=>params[:user_id],:role_id_id=>1)
-
-    if pur_save.save
-      redirect_to project_path(:id=>params[:project_id]), :notice=> 'Assign Team Manager success'
-    else
-      redirect_to project_path(:id=>params[:project_id]), :alert=> 'Assign Team Manager failed'
-    end
-  end
-
-  def set_deactive_manager
-    pur_destroy = ProjectUserRole.find_by(:project_id_id=>params[:project_id],:user_id_id=>params[:user_id],:role_id_id=>1)
-
-    if pur_destroy.destroy
-      redirect_to project_path(:id=>params[:project_id]), :notice=> 'Remove Team Manager success'
-    else
-      redirect_to project_path(:id=>params[:project_id]), :alert=> 'Remove Team Manager failed'
-    end
-  end
-
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
@@ -143,7 +116,4 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(:project_name, :created_by, :delete_flg, :start_date, :end_date)
     end
 
-  def document_version_params
-    params.require(:document_version).permit(:file)
-  end
 end
