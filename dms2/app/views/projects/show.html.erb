@@ -8,10 +8,12 @@
       <li role="presentation"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Project details</a></li>
       <li role="presentation"><a href="#members" aria-controls="members" role="tab" data-toggle="tab">All members</a></li>
       <li role="presentation"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">All documents</a></li>
+      <li role="presentation"><a href="#logRecords" aria-controls="logRecords" role="tab" data-toggle="tab">Log Records</a></li>
   <% else %>
       <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Project details</a></li>
       <li role="presentation"><a href="#members" aria-controls="members" role="tab" data-toggle="tab">All members</a></li>
       <li role="presentation"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">All documents</a></li>
+      <li role="presentation"><a href="#logRecords" aria-controls="logRecords" role="tab" data-toggle="tab">Log Records</a></li>
   <% end %>
 
 </ul>
@@ -164,6 +166,31 @@
                   <% end %>
               <% end%>
               <td><%= link_to 'Upload',newDocVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-danger", :style => "width:100%;" %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+    <!-- 5th tab -->
+  <div role="tabpanel" class="tab-pane active" id="logRecords">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><strong>Log Records</strong></div>
+      <table class="table table-bordered table-striped">
+        <tbody>
+        <% @logRecords.each do |logRecord| %>
+            <tr>
+              <td>
+                <div class = "log_datetime"><%= distance_of_time_in_words_to_now(logRecord.updated_at) + ' ago' %></div>
+                <b style ="color:#4183c4;"><%= logRecord.firstname %></b>
+                <%= " " + "updated" + " " %>
+                <%= link_to logRecord.document_name , docVer_path(:projectId => @project.id, :docId => logRecord.document_id_id) %>
+                <div class ="log_comment"><%= logRecord.comment  %></div>
+
+              </td>
+<!--               <td><%= logRecord.document_name %></td>
+              <td><%= logRecord.comment  %></td>
+              <td><%= logRecord.firstname  %></td> -->
             </tr>
         <% end %>
         </tbody>

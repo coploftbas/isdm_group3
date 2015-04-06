@@ -9,3 +9,12 @@ body > .container{
 	opacity: 0.8;
 	text-decoration: none;
 }
+.log_comment{
+	clear: both;
+	padding-left: 15px;
+	font-size: 11px;
+}
+.log_datetime{
+	font-size: 11px;
+	color: #bbb;
+}
