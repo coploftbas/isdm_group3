@@ -141,8 +141,17 @@
           <th colspan="3">Actions</th>
         </tr>
         </thead>
-
         <tbody>
+        <!-- quality template validation -->
+        <% qtv = 0 %>
+        <% @documents.each do |doc| %>
+          <% max_version = DocumentVersion.where(:project_id => @project.id, :document_id_id => doc.id).maximum(:version) %>
+          <% if doc.templateVersion == '8.1' && !max_version.nil? %>
+            <% qtv += 1 %>
+          <% end %>
+        <% end %>
+        <!-- quality template validation -->
+
         <% @documents.each do |doc| %>
             <tr>
               <td><%= doc.id %></td>
@@ -165,7 +174,16 @@
                     <td><%= link_to 'Download Lastest Version', my_dv.file.url,:class => "btn btn-warning", :style => "width:100%;" %></td>
                   <% end %>
               <% end%>
-              <td><%= link_to 'Upload',newDocVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-danger", :style => "width:100%;" %></td>
+
+              <% if doc.templateVersion == '8.1' %>
+                <td><%= link_to 'Upload',newDocVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-danger", :style => "width:100%;" %></td>
+              <% else %>
+                <% if qtv != 6 %>
+                  <td><a href='#' class = "btn btn-danger disabled" style = "width:100%;">Upload</a></td>
+                <% else %>
+                  <td><%= link_to 'Upload',newDocVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-danger", :style => "width:100%;" %></td>
+                <% end %>
+              <% end %>
             </tr>
         <% end %>
         </tbody>
