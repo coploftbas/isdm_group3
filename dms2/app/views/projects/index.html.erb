@@ -15,6 +15,7 @@
   <thead>
     <tr>
       <th>Project name</th>
+      <th>User Type</th>
       <th>Start date</th>
       <th>End date</th>
       <% if current_user.id == 1 %>
@@ -27,6 +28,7 @@
     <% @current_user_work_on_project.each do |project| %>
       <tr>
         <td><%= link_to Project.find(project.project_id_id).project_name,  Project.find(project.project_id_id) %></td>
+        <td><%= Role.find(current_user).role_name %></td>
         <td><%= Project.find(project.project_id_id).start_date %></td>
         <td><%= Project.find(project.project_id_id).end_date %></td>
         <% if current_user.id == 1 %>
