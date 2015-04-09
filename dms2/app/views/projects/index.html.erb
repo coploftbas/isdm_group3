@@ -15,6 +15,7 @@
   <thead>
     <tr>
       <th>Project name</th>
+      <th>User Type</th>
       <th>Start date</th>
       <th>End date</th>
       <% if current_user.id == 1 %>
@@ -27,11 +28,19 @@
     <% @current_user_work_on_project.each do |project| %>
       <tr>
         <td><%= link_to Project.find(project.project_id_id).project_name,  Project.find(project.project_id_id) %></td>
+        <% if current_user.id == project.created_by_id %>
+        <td>Team Manager</td>
+        <% else %>
+        <td>Team Member</td>
+        <% end %>
         <td><%= Project.find(project.project_id_id).start_date %></td>
         <td><%= Project.find(project.project_id_id).end_date %></td>
-        <% if current_user.id == 1 %>
+        <% if current_user.id == project.created_by_id %>
         <td><%= link_to image_tag('edit.png'), edit_project_path(Project.find(project.project_id_id)) %></td>
         <td><%= link_to image_tag('delete.png'), Project.find(project.project_id_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+        <td></td>
+        <td></td>
         <% end %>
       </tr>
     <% end %>
@@ -39,7 +48,7 @@
 </table>
 
 <br>
-<% if (current_user.id == 1) %>
+<% if (UserType.find(current_user.user_type_id_id).id == 1) %>
 <div class="col-md-3">
   <%= link_to 'New Project', new_project_path, :class => "btn btn-primary", :style => "width:100%;" %>
 </div>
