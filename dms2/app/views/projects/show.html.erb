@@ -189,36 +189,7 @@
         </tbody>
       </table>
     </div>
-  </div>
-    <!-- 5th tab -->
-  <div role="tabpanel" class="tab-pane" id="logRecords">
-    <div class="panel panel-primary">
-      <div class="panel-heading"><strong>Log Records</strong></div>
-      <table class="table table-bordered table-striped">
-        <tbody>
-        <% @logRecords.each do |logRecord| %>
-            <tr>
-              <td>
-                <div class = "log_datetime"><%= distance_of_time_in_words_to_now(logRecord.updated_at) + ' ago' %></div>
-                <b style ="color:#4183c4;"><%= logRecord.firstname %></b>
-                <%= " " + "updated" + " " %>
-                <%= link_to logRecord.document_name , docVer_path(:projectId => @project.id, :docId => logRecord.document_id_id) %>
-                <div class ="log_comment"><%= logRecord.comment  %></div>
-
-              </td>
-<!--               <td><%= logRecord.document_name %></td>
-              <td><%= logRecord.comment  %></td>
-              <td><%= logRecord.firstname  %></td> -->
-            </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-</div>
-
-<div role="tabpanel" class="tab-pane active" id="assign">
+    <div role="tabpanel" class="tab-pane active" id="assign">
     <div class="panel panel-success">
       <div class="panel-heading"><strong>Quality Management Workflow</strong></div>
       <table class="table table-bordered table-striped">
@@ -272,4 +243,32 @@
         </tbody>
       </table>
     </div>
+</div>
+  </div>
+    <!-- 5th tab -->
+  <div role="tabpanel" class="tab-pane" id="logRecords">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><strong>Log Records</strong></div>
+      <table class="table table-bordered table-striped">
+        <tbody>
+        <% @logRecords.each do |logRecord| %>
+            <tr>
+              <td>
+                <div class = "log_datetime"><%= distance_of_time_in_words_to_now(logRecord.updated_at) + ' ago' %></div>
+                <b style ="color:#4183c4;"><%= logRecord.firstname %></b>
+                <%= " " + "updated" + " " %>
+                <%= link_to logRecord.document_name , docVer_path(:projectId => @project.id, :docId => logRecord.document_id_id) %>
+                <div class ="log_comment"><%= logRecord.comment  %></div>
+
+              </td>
+<!--               <td><%= logRecord.document_name %></td>
+              <td><%= logRecord.comment  %></td>
+              <td><%= logRecord.firstname  %></td> -->
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>
