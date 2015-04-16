@@ -18,8 +18,7 @@ class DocumentVersion < ActiveRecord::Base
 
 =begin
   def renameFile
-    extension = File.extname(file_file_name).downcase
-    self.file.instance_write :file_name, "#{@thisName.to_s}#{extension}"
+    
   end
 =end
 
