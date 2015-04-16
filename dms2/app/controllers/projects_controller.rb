@@ -10,7 +10,9 @@ class ProjectsController < ApplicationController
   
   def index
     @projects = Project.all
-		@current_user_work_on_project = Project.joins("LEFT JOIN project_user_roles ON(projects.id = project_user_roles.project_id_id)").select("projects.id, projects.project_name, projects.created_by_id, project_user_roles.*").where("project_user_roles.user_id_id = ?", current_user.id).search(params[:search])
+		@current_user_work_on_project = Project.joins("LEFT JOIN project_user_roles ON(projects.id = project_user_roles.project_id_id)").select("projects.id, projects.project_name, projects.created_by_id, project_user_roles.user_id_id, 
+      project_user_roles.role_id_id, project_user_roles.project_id_id, project_user_roles.created_at,
+      project_user_roles.updated_at").where("project_user_roles.user_id_id = ?", current_user.id).search(params[:search])
 
   end
 
@@ -21,6 +23,7 @@ class ProjectsController < ApplicationController
     @members = ProjectUserRole.where(:project_id_id => params[:id])
     @documents = Document.order(:id).all
     @logRecords = DocumentVersion.joins("LEFT JOIN users ON(document_versions.updated_by_id = users.id)").select("document_versions.document_id_id, document_versions.document_name, document_versions.comment, document_versions.updated_by_id, document_versions.updated_at, users.firstname").where(:project_id => params[:id])
+    @approvals = DocumentVersion.where("project_id =? and remark = ?" ,  params[:id], "Completed")
   end
 
   def assign_role

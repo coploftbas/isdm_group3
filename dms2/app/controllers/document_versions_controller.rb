@@ -20,6 +20,7 @@ class DocumentVersionsController < InheritedResources::Base
   def create
     @document_version = DocumentVersion.new(document_version_params)
     @document_version.document_name = params[:document_version][:document_name]
+    @document_version.remark = params[:document_version][:remark]
     @document_version.comment = params[:document_version][:comment]
     @document_version.project_id = params[:document_version][:project_id]
     @document_version.document_id_id = params[:document_version][:document_id_id]
