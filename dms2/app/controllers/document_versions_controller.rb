@@ -71,8 +71,8 @@ class DocumentVersionsController < InheritedResources::Base
 
   def set_active_doc
     pur_save = DocumentVersion.find(params[:document_id])
-    pur_save.approveStatus = "Approved"
-    if pur_save.save
+    # pur_save.update_attribute(:approveStatus, "Approved")
+    if pur_save.update_attribute(:approveStatus, "Approved")
       redirect_to project_path(:id=>params[:project_id]), :notice=> 'Document approved successfully'
     else
       redirect_to project_path(:id=>params[:project_id]), :alert=> 'Document approval failed!'

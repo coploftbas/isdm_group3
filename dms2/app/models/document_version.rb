@@ -3,7 +3,7 @@ class DocumentVersion < ActiveRecord::Base
   #belongs_to :updated_by
   belongs_to :document
 
-  before_save :renameFile
+  # before_save :renameFile
 
   has_attached_file :file,
                     :path => ":rails_root/public/documents/:id/:filename",
@@ -12,11 +12,12 @@ class DocumentVersion < ActiveRecord::Base
 
   def setDocumentName(name)
     @thisName = name.to_s
+    extension = File.extname(file_file_name).downcase
+    self.file.instance_write :file_name, "#{@thisName.to_s}#{extension}"
   end
 
   def renameFile
-    extension = File.extname(file_file_name).downcase
-    self.file.instance_write :file_name, "#{@thisName.to_s}#{extension}"
+    
   end
 
 end
