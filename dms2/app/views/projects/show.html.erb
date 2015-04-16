@@ -285,7 +285,7 @@
           <th>Document name</th>
           <th>Updated By</th>
           <th>Updated at</th>
-          <th>Remark</th>
+          <th>Approve status</th>
           <th colspan="3">Actions</th>
         </tr>
         </thead>
@@ -298,10 +298,14 @@
               <% usr2 =  User.find(doc.updated_by_id) %>
               <td><%= usr2.firstname+" "+usr2.lastname %></td>
               <td><%=doc.updated_at.strftime("%Y-%m-%d") %></td>
-              <td><%=doc.remark %></td>
+              <% if doc.approveStatus.nil? %>
+                <td>Pending to approve..</td>
+              <% else %>
+                <td><%=doc.approveStatus %></td>
+              <% end %>
               <td><%= link_to 'Download Lastest Version', doc.file.url,:class => "btn btn-warning", :style => "width:100%;" %></td>
               <td>
-                <%= link_to "Approved", {:controller => :document_versions, :action=> :set_active_doc, :project_id => doc.project_id, document_id: doc.id}, :class =>'btn btn-success', :style=>"width:40%;" %>
+                <%= link_to "Approved", {:controller => :document_versions, :action=> :set_active_doc, :project_id => doc.project_id, document_id: doc.id}, :class =>'btn btn-success', :style=>"width:100%;" %>
               </td>
             </tr>
             <% count += 1 %>

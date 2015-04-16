@@ -59,12 +59,12 @@ ActiveRecord::Schema.define(version: 20150416035359) do
     t.integer  "document_id_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "project_id"
-    t.integer  "version"
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.integer  "project_id"
+    t.integer  "version"
     t.string   "remark"
     t.string   "approveStatus"
   end
@@ -83,6 +83,10 @@ ActiveRecord::Schema.define(version: 20150416035359) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "project_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
     t.text     "templateVersion"
   end
 

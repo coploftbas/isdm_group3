@@ -24,6 +24,8 @@ ActiveAdmin.register DocumentVersion do
     column :document_id_id
     column :project_id
     column :version
+    column :remark
+    column :approveStatus
     actions
   end
 
@@ -34,11 +36,13 @@ ActiveAdmin.register DocumentVersion do
       f.input :document_id_id
       f.input :project_id
       f.input :version
+      f.input :remark
+      f.input :approveStatus
     end
     f.actions
   end
 
 
-  permit_params :id, :document_name, :version_document_name, :file_location, :comment, :created_by_id, :created_at, :updated_by_id, :updated_at, :document_id_id, :project_id, :version
+  permit_params :id, :document_name, :version_document_name, :file_location, :comment, :created_by_id, :created_at, :updated_by_id, :updated_at, :document_id_id, :project_id, :version, :remark, :approveStatus
 
 end
