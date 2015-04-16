@@ -81,11 +81,11 @@ class DocumentVersionsController < InheritedResources::Base
 
   def set_deactive_doc
     # pur_destroy = ProjectUserRole.find_by(:project_id_id=>params[:project_id],:user_id_id=>params[:user_id],:role_id_id=>2)
-
-    if pur_destroy.destroy
-      redirect_to project_path(:id=>params[:project_id]), :notice=> 'Remove member success'
+    pur_save = DocumentVersion.find(params[:document_id])
+    if pur_save.update_attribute(:remark, "Processing")
+      redirect_to project_path(:id=>params[:project_id]), :notice=> 'Reject document success'
     else
-      redirect_to project_path(:id=>params[:project_id]), :alert=> 'Remove member failed'
+      redirect_to project_path(:id=>params[:project_id]), :alert=> 'Reject document failed'
     end
   end
 

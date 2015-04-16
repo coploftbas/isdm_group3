@@ -304,8 +304,13 @@
                 <td><%=doc.approveStatus %></td>
               <% end %>
               <td><%= link_to 'Download Lastest Version', doc.file.url,:class => "btn btn-warning", :style => "width:100%;" %></td>
+              <% if doc.approveStatus.nil? %>
+                  <td><%= link_to "Approved", {:controller => :document_versions, :action=> :set_active_doc, :project_id => doc.project_id, document_id: doc.id}, :class =>'btn btn-success', :style=>"width:100%;" %></td>
+              <% else %>
+                  <td><a href='#' class = "btn btn-success disabled" style = "width:100%;">Approved</a></td>
+              <% end %>
               <td>
-                <%= link_to "Approved", {:controller => :document_versions, :action=> :set_active_doc, :project_id => doc.project_id, document_id: doc.id}, :class =>'btn btn-success', :style=>"width:100%;" %>
+                <%= link_to "Rejected", {:controller => :document_versions, :action=> :set_deactive_doc, :project_id => doc.project_id, document_id: doc.id}, :class =>'btn btn-danger', :style=>"width:100%;" %>
               </td>
             </tr>
             <% count += 1 %>
