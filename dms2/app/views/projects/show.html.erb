@@ -179,10 +179,17 @@
                     <td><%= link_to 'Download Lastest Version', my_dv.file.url,:class => "btn btn-warning", :style => "width:100%;" %></td>
                   <% end %>
               <% end%>
+
+
+
               <% if doc.templateVersion == '8.1' %>
-                <td><%= link_to 'Upload',newDocVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-danger", :style => "width:100%;" %></td>
+                  <% if remark == 'Completed' %>
+                    <td><a href='#' class = "btn btn-danger disabled" style = "width:100%;">Upload</a></td>
+                  <% else %>
+                    <td><%= link_to 'Upload',newDocVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-danger", :style => "width:100%;" %></td>
+                  <% end %>
               <% else %>
-                <% if qtv != 6 %>
+                <% if qtv != 6  || remark == 'Completed' %>
                   <td><a href='#' class = "btn btn-danger disabled" style = "width:100%;">Upload</a></td>
                 <% else %>
                   <td><%= link_to 'Upload',newDocVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-danger", :style => "width:100%;" %></td>
