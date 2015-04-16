@@ -44,6 +44,12 @@
       <%= f.label :file, 'Please select a template document to upload:' %><br/><br/>
       <%= f.file_field :file, :class=>'form-control'%>
     </div>
+    <br/><br/>
+    <div class = "field">
+      <%= f.label :Remark %><br>
+      <%= f.select :remark, options_for_select(["Processing", "Completed"]), :class => 'dropdown-menu' %>
+    </div>
+    <br/><br/>
   <div class="actions">
     <%= f.submit  :class=>'btn btn-success', :style=>'width:100%' %>
   </div>

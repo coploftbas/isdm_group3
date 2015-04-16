@@ -18,3 +18,62 @@ body > .container{
 	font-size: 11px;
 	color: #bbb;
 }
+.action-control{
+	padding-right: 20px;
+}
+.good-progress{
+	background-color: #5cb85c;
+	height: 20px;
+}
+/*css for project index page for  progress bar*/
+#bar-container { text-align: center; margin: 0px; }
+h2 { color: #CCC; }
+.bar-main-container {
+  width: 200px;
+  height: 30px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-family: sans-serif;
+  font-weight: normal;
+  font-size: 0.8em;
+  color: #FFF;
+}
+.wrap { padding: 8px; }
+.bar-percentage {
+  float: left;
+  background: rgba(0,0,0,0.13);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 0px 0px;
+  width: 18%;
+  height: 16px;
+}
+.bar-container {
+  float: right;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  height: 10px;
+  background: rgba(0,0,0,0.11);
+  width: 78%;
+  margin: 3px 0px;
+  overflow: hidden;
+}
+.bar {
+  float: left;
+  background: #FFF;
+  height: 100%;
+  -webkit-border-radius: 10px 0px 0px 10px;
+  -moz-border-radius: 10px 0px 0px 10px;
+  border-radius: 10px 0px 0px 10px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  opacity: 1;
+}
+/* COLORS */
+.emerald { background: #428bca; }
+/*end of css for project index page for  progress bar*/

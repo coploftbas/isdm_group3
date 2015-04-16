@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   get 'set_active' => 'projects#set_active', as: :projects_set_active
   get 'set_deactive' => 'projects#set_deactive', as: :projects_set_deactive
 
+  get 'set_active_doc' => 'document_versions#set_active_doc', as: :set_active_doc
+  get 'set_deactive_doc' => 'document_versions#set_deactive_doc', as: :set_deactive_doc
+
   get 'set_active_manager' => 'projects#set_active_manager', as: :projects_set_active_manager
   get 'set_deactive_manager' => 'projects#set_deactive_manager', as: :projects_set_deactive_manager
 

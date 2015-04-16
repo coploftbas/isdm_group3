@@ -1,3 +1,16 @@
+<script type="text/javascript">
+jQuery(function($) {
+  console.log("m alive");
+  // $("#category_id").change(function() {
+  //   var state = $('select#category_id :selected').val();
+  //   if(state == "") state="0";
+  //   jQuery.getJSON('/foo/bar/' + state, function(data){
+  //       $("#category_textbox").val(data.message);
+  //   })
+  //   return false;
+  // });
+})
+</script>
 <div class="page-header">
   <h1><%= @project.project_name %> Project</h1>
 </div>
@@ -8,11 +21,13 @@
       <li role="presentation"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Project details</a></li>
       <li role="presentation"><a href="#members" aria-controls="members" role="tab" data-toggle="tab">All members</a></li>
       <li role="presentation"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">All documents</a></li>
+      <li role="presentation"><a href="#approveDoc" aria-controls="approveDoc" role="tab" data-toggle="tab">Approve Documents</a></li>
       <li role="presentation"><a href="#logRecords" aria-controls="logRecords" role="tab" data-toggle="tab">Log Records</a></li>
   <% else %>
       <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Project details</a></li>
       <li role="presentation"><a href="#members" aria-controls="members" role="tab" data-toggle="tab">All members</a></li>
       <li role="presentation"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">All documents</a></li>
+      <li role="presentation"><a href="#approveDoc" aria-controls="approveDoc" role="tab" data-toggle="tab">Approve Documents</a></li>
       <li role="presentation"><a href="#logRecords" aria-controls="logRecords" role="tab" data-toggle="tab">Log Records</a></li>
   <% end %>
 
@@ -138,6 +153,7 @@
           <th>Version</th>
           <th>Updated at</th>
           <th>Updated by</th>
+          <th>Remark</th>
           <th colspan="3">Actions</th>
         </tr>
         </thead>
@@ -157,24 +173,26 @@
               <td><%= doc.id %></td>
               <td><%= doc.name  %></td>
               <% max_version = DocumentVersion.where(:project_id => @project.id, :document_id_id => doc.id).maximum(:version) %>
+              <% remark  = DocumentVersion.where(:project_id => @project.id, :document_id_id => doc.id).minimum(:remark) %>
               <% if max_version.nil? %>
                 <td>0</td>
                 <td>-</td>
                 <td>System</td>
+                <td><%= remark %></td>
                 <td><a href='#' class = "btn btn-info disabled" style = "width:100%;">All Versions</a></td>
                 <td><%=  link_to 'Download Lastest Version', root_url+'templates/'+doc.file_location ,:class => "btn btn-warning", :style => "width:100%;"%></td>
               <% else %>
                 <td><%= max_version %></td>
                 <% tmp_dv = DocumentVersion.where(:project_id => @project.id, :document_id_id => doc.id, :version=> max_version) %>
                   <% tmp_dv.each do |my_dv| %>
-                    <td><%= my_dv.updated_at %></td>
+                    <td><%=my_dv.updated_at.strftime("%Y-%m-%d") %></td>
                     <% usr2 =  User.find(my_dv.updated_by_id) %>
                     <td><%= usr2.firstname+" "+usr2.lastname %></td>
+                    <td><%= remark %></td>
                     <td><%= link_to 'All Versions',docVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-info", :style => "width:100%;" %></td>
                     <td><%= link_to 'Download Lastest Version', my_dv.file.url,:class => "btn btn-warning", :style => "width:100%;" %></td>
                   <% end %>
               <% end%>
-
               <% if doc.templateVersion == '8.1' %>
                 <td><%= link_to 'Upload',newDocVer_path(:projectId => @project.id, :docId => doc.id),:class => "btn btn-danger", :style => "width:100%;" %></td>
               <% else %>
@@ -270,5 +288,50 @@
       </table>
     </div>
   </div>
+  <!-- 6th Tab -->
+    <div role="tabpanel" class="tab-pane" id="approveDoc">
+    <div class="panel panel-success">
+      <div class="panel-heading"><strong>Approve Document</strong></div>
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Document name</th>
+          <th>Updated By</th>
+          <th>Updated at</th>
+          <th>Remark</th>
+          <th colspan="3">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% count = 1 %>
+        <% @approvals.each do |doc| %>
+            <tr>
+              <td><%= count %></td>
+              <td><%= doc.document_name  %></td>
+              <% usr2 =  User.find(doc.updated_by_id) %>
+              <td><%= usr2.firstname+" "+usr2.lastname %></td>
+              <td><%=doc.updated_at.strftime("%Y-%m-%d") %></td>
+              <td><%=doc.remark %></td>
+              <td><%= link_to 'Download Lastest Version', doc.file.url,:class => "btn btn-warning", :style => "width:100%;" %></td>
+              <td>
+                <div class="dropdown">
+                  <%= select_tag('approval-status', options_for_select(["Approved", "Rejected"]), :class => "btn btn-default dropdown-toggle", :include_blank => true) %>
+                </div>
+              </td>
+            </tr>
+            <% count += 1 %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // code here
+  alert(2);
+});
+</script>

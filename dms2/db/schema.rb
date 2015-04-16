@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407034023) do
+ActiveRecord::Schema.define(version: 20150416035359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 20150407034023) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.string   "remark"
+    t.string   "approveStatus"
   end
 
   add_index "document_versions", ["created_by_id"], name: "index_document_versions_on_created_by_id", using: :btree
