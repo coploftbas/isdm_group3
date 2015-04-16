@@ -69,6 +69,25 @@
           <% mng = User.find(ProjectUserRole.find_by(:project_id_id=>@project.id,:role_id_id=>1).user_id_id) %>
           <td><%= mng.firstname+' '+mng.lastname %></td>
         </tr>
+        <tr>
+          <td><strong>Status</strong></td>
+          <% statusCompletion = DocumentVersion.where(:project_id => @project.id, :approveStatus => "Approved").count %>
+          <%= statusCompletion %>
+
+          <td>
+            <div id="bar-container">
+            <div id="bar-2" class="bar-main-container emerald">
+              <div class="wrap">
+                <div class="bar-percentage" data-percentage="<%= statusCompletion %>"></div>
+                <div class="bar-container">
+                  <div class="bar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          </td>
+        </tr>
       </table>
     </div>
   </div>
@@ -94,6 +113,25 @@
               <% mng = User.find(ProjectUserRole.find_by(:project_id_id=>@project.id,:role_id_id=>1).user_id_id) %>
               <td><%= mng.firstname+' '+mng.lastname %></td>
             </tr>
+                    <tr>
+          <td><strong>Status</strong></td>
+          <% statusCompletion = DocumentVersion.where(:project_id => @project.id, :approveStatus => "Approved").count %>
+          <%= statusCompletion %>
+
+          <td>
+            <div id="bar-container">
+            <div id="bar-2" class="bar-main-container emerald">
+              <div class="wrap">
+                <div class="bar-percentage" data-percentage="<%= statusCompletion %>"></div>
+                <div class="bar-container">
+                  <div class="bar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          </td>
+        </tr>
           </table>
         </div>
       </div>
@@ -328,3 +366,27 @@
   </div>
 
 </div>
+
+<script type="text/javascript">
+$('.bar-percentage[data-percentage]').each(function () {
+  var progress = $(this);
+   percentage = Math.ceil($(this).attr('data-percentage')),
+   total = 15,
+   mul = 6.666666667,
+   percentage = percentage * mul;
+  $({countNum: 0}).animate({countNum: percentage}, {
+    duration: 1000,
+    easing:'linear',
+    step: function() {
+      // What todo on every count
+    var pct = '';
+    if(percentage == 0){
+      pct = Math.floor(this.countNum) + '%';
+    }else{
+      pct = Math.floor(this.countNum+1) + '%';
+    }
+    progress.text(pct) && progress.siblings().children().css('width',pct);
+    }
+  });
+});
+</script>
