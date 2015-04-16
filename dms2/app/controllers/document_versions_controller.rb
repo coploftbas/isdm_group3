@@ -69,6 +69,26 @@ class DocumentVersionsController < InheritedResources::Base
     end
   end
 
+  def set_active_doc
+    pur_save = DocumentVersion.find(params[:document_id])
+    pur_save.approveStatus = "Approved"
+    if pur_save.save
+      redirect_to project_path(:id=>params[:project_id]), :notice=> 'Document approved successfully'
+    else
+      redirect_to project_path(:id=>params[:project_id]), :alert=> 'Document approval failed!'
+    end
+  end
+
+  def set_deactive_doc
+    # pur_destroy = ProjectUserRole.find_by(:project_id_id=>params[:project_id],:user_id_id=>params[:user_id],:role_id_id=>2)
+
+    if pur_destroy.destroy
+      redirect_to project_path(:id=>params[:project_id]), :notice=> 'Remove member success'
+    else
+      redirect_to project_path(:id=>params[:project_id]), :alert=> 'Remove member failed'
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_document_version

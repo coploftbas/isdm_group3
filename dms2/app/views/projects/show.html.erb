@@ -1,16 +1,3 @@
-<script type="text/javascript">
-jQuery(function($) {
-  console.log("m alive");
-  // $("#category_id").change(function() {
-  //   var state = $('select#category_id :selected').val();
-  //   if(state == "") state="0";
-  //   jQuery.getJSON('/foo/bar/' + state, function(data){
-  //       $("#category_textbox").val(data.message);
-  //   })
-  //   return false;
-  // });
-})
-</script>
 <div class="page-header">
   <h1><%= @project.project_name %> Project</h1>
 </div>
@@ -27,7 +14,6 @@ jQuery(function($) {
       <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Project details</a></li>
       <li role="presentation"><a href="#members" aria-controls="members" role="tab" data-toggle="tab">All members</a></li>
       <li role="presentation"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">All documents</a></li>
-      <li role="presentation"><a href="#approveDoc" aria-controls="approveDoc" role="tab" data-toggle="tab">Approve Documents</a></li>
       <li role="presentation"><a href="#logRecords" aria-controls="logRecords" role="tab" data-toggle="tab">Log Records</a></li>
   <% end %>
 
@@ -315,9 +301,7 @@ jQuery(function($) {
               <td><%=doc.remark %></td>
               <td><%= link_to 'Download Lastest Version', doc.file.url,:class => "btn btn-warning", :style => "width:100%;" %></td>
               <td>
-                <div class="dropdown">
-                  <%= select_tag('approval-status', options_for_select(["Approved", "Rejected"]), :class => "btn btn-default dropdown-toggle", :include_blank => true) %>
-                </div>
+                <%= link_to "Approved", {:controller => :document_versions, :action=> :set_active_doc, :project_id => doc.project_id, document_id: doc.id}, :class =>'btn btn-success', :style=>"width:40%;" %>
               </td>
             </tr>
             <% count += 1 %>
@@ -328,10 +312,3 @@ jQuery(function($) {
   </div>
 
 </div>
-
-<script type="text/javascript">
-$(document).ready(function() {
-  // code here
-  alert(2);
-});
-</script>
