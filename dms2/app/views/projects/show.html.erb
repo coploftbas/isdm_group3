@@ -72,7 +72,6 @@
         <tr>
           <td><strong>Status</strong></td>
           <% statusCompletion = DocumentVersion.where(:project_id => @project.id, :approveStatus => "Approved").count %>
-          <%= statusCompletion %>
 
           <td>
             <div id="bar-container">

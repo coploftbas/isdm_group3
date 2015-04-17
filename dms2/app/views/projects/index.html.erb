@@ -39,7 +39,6 @@
 
 
         <% statusCompletion = DocumentVersion.where(:project_id => project.id, :approveStatus => "Approved").count %>
-        <%= statusCompletion %>
         <td><%= Project.find(project.project_id_id).start_date %></td>
         <td><%= Project.find(project.project_id_id).end_date %></td>
         <td>
