@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
 		@current_user_work_on_project = Project.joins("LEFT JOIN project_user_roles ON(projects.id = project_user_roles.project_id_id)").select("projects.id, projects.project_name, projects.created_by_id, project_user_roles.user_id_id, 
       project_user_roles.role_id_id, project_user_roles.project_id_id, project_user_roles.created_at,
       project_user_roles.updated_at").where("project_user_roles.user_id_id = ?", current_user.id).search(params[:search])
-
+    @current_user_work_on_project = @current_user_work_on_project.paginate(:per_page=>5, :page => params[:page])
   end
 
   # GET /projects/1

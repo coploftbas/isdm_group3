@@ -42,6 +42,7 @@ gem 'devise'
 gem 'bootstrap3-rails'
 gem 'activeadmin', github: 'activeadmin'
 gem 'paperclip', '~> 4.2'
+gem 'will_paginate'
 group :development do
   gem'better_errors'
   gem'meta_request' #chromeextension:http://goo.gl/hM1ekO

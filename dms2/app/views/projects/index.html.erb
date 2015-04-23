@@ -64,7 +64,9 @@
     <% end %>
   </tbody>
 </table>
-
+<div class="flickr_pagination">
+    <%= will_paginate @current_user_work_on_project %>
+</div>
 <br>
 <% if (UserType.find(current_user.user_type_id_id).id == 1) %>
 <div class="col-md-3">
