@@ -303,7 +303,17 @@
               <td>
                 <div class = "log_datetime"><%= distance_of_time_in_words_to_now(logRecord.updated_at) + ' ago' %></div>
                 <b style ="color:#4183c4;"><%= logRecord.firstname %></b>
-                <%= " " + "updated" + " " %>
+
+
+                <% if logRecord.remark == 'Completed' && logRecord.approveStatus=='Approved' %>
+                  <%= " " + "approved" + " " %>
+                <% elsif logRecord.remark == 'Completed' && logRecord.approveStatus.nil? %>
+                  <%= " " + "requested approval for" + " " %>
+                <%else%>
+                  <%= " " + "updated" + " " %>
+                <% end %>
+
+
                 <%= link_to logRecord.document_name , docVer_path(:projectId => @project.id, :docId => logRecord.document_id_id) %>
                 <div class ="log_comment"><%= logRecord.comment  %></div>
 
