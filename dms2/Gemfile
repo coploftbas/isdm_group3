@@ -38,9 +38,11 @@ gem 'pry'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+
+gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 gem 'bootstrap3-rails'
-gem 'activeadmin', github: 'activeadmin'
+
 gem 'paperclip', '~> 4.2'
 gem 'will_paginate'
 group :development do
