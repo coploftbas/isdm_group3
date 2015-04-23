@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
     @users = User.where.not(id: current_user.id)
     @members = ProjectUserRole.where(:project_id_id => params[:id])
     @documents = Document.order(:id).all
-    @logRecords = DocumentVersion.joins("LEFT JOIN users ON(document_versions.updated_by_id = users.id)").select("document_versions.document_id_id, document_versions.document_name, document_versions.comment, document_versions.updated_by_id, document_versions.updated_at, users.firstname").where(:project_id => params[:id])
+    @logRecords = DocumentVersion.joins("LEFT JOIN users ON(document_versions.updated_by_id = users.id)").select('document_versions.document_id_id, document_versions.document_name, document_versions.comment, document_versions.updated_by_id, document_versions.updated_at, users.firstname, document_versions.remark, document_versions."approveStatus"').where(:project_id => params[:id])
     @approvals = DocumentVersion.where("project_id =? and remark = ?" ,  params[:id], "Completed")
   end
 
