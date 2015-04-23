@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3714373691">
+  <component name="DataSourceManagerImpl" format="xml" hash="3448818791">
     <data-source source="LOCAL" name="Rails dms2: development" uuid="bd8a2d7f-6cd0-4ff5-8ab3-c6270480c716">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
@@ -17,6 +17,12 @@
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql:dms2_production</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails dms2: cucumber" uuid="fad02675-0e72-479b-b5e2-dc20d9e18a2b">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:dms2_development</jdbc-url>
       <libraries />
     </data-source>
   </component>

@@ -9,4 +9,7 @@
   <data-source source="LOCAL" name="Rails dms2: production" uuid="e73246bc-9826-488c-b1e9-6991a5425c70">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
+  <data-source source="LOCAL" name="Rails dms2: cucumber" uuid="fad02675-0e72-479b-b5e2-dc20d9e18a2b">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
 </component>
